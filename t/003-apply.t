@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 14;
+use Test::More tests => 15;
 use Test::Exception;
 
 do {
@@ -54,12 +54,6 @@ do {
         method $p->thaw_method   => $thawer;
     };
 };
-
-throws_ok {
-    package MyClass::Error;
-    use Moose;
-    with 'MyRole::Storage';
-} qr/^Attribute \(format\) is required/;
 
 do {
     package MyClass::Dumper;
@@ -118,6 +112,20 @@ do {
 };
 
 can_ok('MyClass::Three' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable store dump));
+
+throws_ok {
+    package MyClass::Error::Required;
+    use Moose;
+    with 'MyRole::Storage';
+} qr/^Attribute \(format\) is required/;
+
+throws_ok {
+    package MyClass::Error::Invalid;
+    use Moose;
+    with 'MyRole::Storage' => {
+        format => 'YAML',
+    };
+} qr/^Attribute \(format\) does not pass the type constraint/;
 
 sub cant_ok {
     local $Test::Builder::Level = $Test::Builder::Level + 1;
