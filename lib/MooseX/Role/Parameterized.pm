@@ -4,7 +4,7 @@ use Moose qw/extends around confess/;
 use Moose::Role ();
 extends 'Moose::Exporter';
 
-use MooseX::Role::Parameterized::Meta::Role;
+use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
 our $CURRENT_METACLASS;
 
@@ -33,7 +33,7 @@ sub init_meta {
     my $self = shift;
 
     return Moose::Role->init_meta(@_,
-        metaclass => 'MooseX::Role::Parameterized::Meta::Role',
+        metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterizable',
     );
 }
 

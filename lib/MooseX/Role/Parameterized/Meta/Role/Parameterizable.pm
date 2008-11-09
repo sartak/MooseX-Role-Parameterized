@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-package MooseX::Role::Parameterized::Meta::Role;
+package MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 use Moose;
 extends 'Moose::Meta::Role';
 
