@@ -39,16 +39,20 @@ sub generate_role {
     confess "A role generator is required to generate roles"
         unless $self->has_role_generator;
 
-    my $role = Moose::Meta::Class->create_anon_class(
+    my $metaclass = Moose::Meta::Class->create_anon_class(
         superclasses => ['Moose::Meta::Role'],
     );
 
     my $parameters = $self->construct_parameters(%args);
 
-    local $MooseX::Role::Parameterized::CURRENT_ROLE = $role;
-    $self->role_generator->($parameters, $role);
+    local $MooseX::Role::Parameterized::CURRENT_METACLASS = $metaclass;
+    $self->role_generator->($parameters,
+        operating_on       => $metaclass,
+        parameterized_role => $self,
+    );
 
-    return $role->construct_instance;
+    my $role = $metaclass->construct_instance;
+    return $role;
 }
 
 __PACKAGE__->meta->make_immutable;
