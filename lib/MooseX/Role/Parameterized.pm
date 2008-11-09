@@ -14,7 +14,13 @@ __PACKAGE__->setup_import_methods(
 
 sub parameter {
     my $caller = shift;
-    $caller->meta->add_parameter(@_);
+    my $names  = shift;
+
+    $names = [$names] if !ref($names);
+
+    for my $name (@$names) {
+        $caller->meta->add_parameter($name, @_);
+    }
 }
 
 sub role {

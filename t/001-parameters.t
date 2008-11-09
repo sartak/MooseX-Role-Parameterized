@@ -49,16 +49,18 @@ do {
     package MyRole::LengthParameter;
     use MooseX::Role::Parameterized;
 
-    parameter name => (
+    parameter ['first_name', 'last_name'] => (
         is  => 'rw',
         isa => 'Str',
     );
 };
 
 $parameter_metaclass = MyRole::LengthParameter->meta->parameter_metaclass;
-is($parameter_metaclass->get_all_attributes, 2, "two parameters");
+is($parameter_metaclass->get_all_attributes, 3, "three parameters");
 
-my $name_param = $parameter_metaclass->get_attribute('name');
-is($name_param->type_constraint, 'Str', 'parameter type constraint');
-ok(!$name_param->is_required, 'name is optional');
+for my $param_name ('first_name', 'last_name') {
+    my $param = $parameter_metaclass->get_attribute($param_name);
+    is($param->type_constraint, 'Str', "$param_name type constraint");
+    ok(!$param->is_required, "$param_name is optional");
+}
 
