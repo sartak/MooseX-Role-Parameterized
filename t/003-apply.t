@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 1;
+use Test::More tests => 14;
 use Test::Exception;
 
 do {
@@ -68,4 +68,62 @@ do {
         format => 'Dumper',
     };
 };
+
+can_ok('MyClass::Dumper' => qw(freeze_Dumper thaw_Dumper));
+cant_ok('MyClass::Storable' => qw(freeze_Storable thaw_Storable));
+
+do {
+    package MyClass::Storable;
+    use Moose;
+    with 'MyRole::Storage' => {
+        format => 'Storable',
+    };
+};
+
+can_ok('MyClass::Storable' => qw(freeze_Storable thaw_Storable));
+cant_ok('MyClass::Storable' => qw(freeze_Dumper thaw_Dumper));
+
+do {
+    package MyClass::DumperRenamed;
+    use Moose;
+    with 'MyRole::Storage' => {
+        format => 'Dumper',
+        freeze_method => 'save',
+        thaw_method   => 'load',
+    };
+};
+
+can_ok('MyClass::DumperRenamed' => qw(save load));
+cant_ok('MyClass::DumperRenamed' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable));
+
+do {
+    package MyClass::Both;
+    use Moose;
+    with 'MyRole::Storage' => { format => 'Dumper'   };
+    with 'MyRole::Storage' => { format => 'Storable' };
+};
+
+can_ok('MyClass::Both' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable));
+
+do {
+    package MyClass::Three;
+    use Moose;
+    with 'MyRole::Storage' => { format => 'Dumper'   };
+    with 'MyRole::Storage' => { format => 'Storable' };
+    with 'MyRole::Storage' => {
+        format        => 'Storable',
+        freeze_method => 'store',
+        thaw_method   => 'dump',
+    };
+};
+
+can_ok('MyClass::Three' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable store dump));
+
+sub cant_ok {
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+    my $instance = shift;
+    for my $method (@_) {
+        ok(!$instance->can($method), "$instance cannot $method");
+    }
+}
 
