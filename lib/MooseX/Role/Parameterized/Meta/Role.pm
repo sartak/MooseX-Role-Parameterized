@@ -6,7 +6,7 @@ extends 'Moose::Meta::Role';
 use MooseX::Role::Parameterized::Parameters;
 
 has parameter_metaclass => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => 'Moose::Meta::Class',
     lazy    => 1,
     default => sub {
