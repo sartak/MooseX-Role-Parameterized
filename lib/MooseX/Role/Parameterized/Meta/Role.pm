@@ -42,15 +42,15 @@ sub generate_role {
     my $metaclass = Moose::Meta::Class->create_anon_class(
         superclasses => ['Moose::Meta::Role'],
     );
+    my $role = $metaclass->construct_instance;
 
     my $parameters = $self->construct_parameters(%args);
 
-    local $MooseX::Role::Parameterized::CURRENT_METACLASS = $metaclass;
+    local $MooseX::Role::Parameterized::CURRENT_METACLASS = $role;
     $self->role_generator->($parameters,
-        operating_on => $metaclass,
+        operating_on => $role,
     );
 
-    my $role = $metaclass->construct_instance;
     return $role;
 }
 
