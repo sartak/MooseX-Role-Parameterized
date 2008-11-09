@@ -70,7 +70,7 @@ do {
 };
 
 can_ok('MyClass::Dumper' => qw(freeze_Dumper thaw_Dumper));
-cant_ok('MyClass::Storable' => qw(freeze_Storable thaw_Storable));
+cant_ok('MyClass::Dumper' => qw(freeze_Storable thaw_Storable));
 
 do {
     package MyClass::Storable;
