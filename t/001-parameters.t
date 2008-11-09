@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 7;
+use Test::More tests => 10;
 use Test::Exception;
 
 use MooseX::Role::Parameterized::Parameters;
@@ -44,3 +44,21 @@ $p = MyRole::LengthParameter->meta->construct_parameters(
 );
 
 is($p->length, 5, "correct length");
+
+do {
+    package MyRole::LengthParameter;
+    use MooseX::Role::Parameterized;
+
+    parameter name => (
+        is  => 'rw',
+        isa => 'Str',
+    );
+};
+
+$parameter_metaclass = MyRole::LengthParameter->meta->parameter_metaclass;
+is($parameter_metaclass->get_all_attributes, 2, "two parameters");
+
+my $name_param = $parameter_metaclass->get_attribute('name');
+is($name_param->type_constraint, 'Str', 'parameter type constraint');
+ok(!$name_param->is_required, 'name is optional');
+
