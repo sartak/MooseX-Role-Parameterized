@@ -20,14 +20,14 @@ sub parameter {
     $names = [$names] if !ref($names);
 
     for my $name (@$names) {
-        $caller->meta->add_parameter($name, @_);
+        Class::MOP::Class->initialize($caller)->add_parameter($name, @_);
     }
 }
 
 sub role {
     my $caller         = shift;
     my $role_generator = shift;
-    $caller->meta->role_generator($role_generator);
+    Class::MOP::Class->initialize($caller)->role_generator($role_generator);
 }
 
 sub init_meta {
