@@ -16,6 +16,12 @@ has parameter_metaclass => (
     },
 );
 
+has role_generator => (
+    is        => 'rw',
+    isa       => 'CodeRef',
+    predicate => 'has_role_generator',
+);
+
 sub add_parameter {
     my $self = shift;
     $self->parameter_metaclass->add_attribute(@_);
