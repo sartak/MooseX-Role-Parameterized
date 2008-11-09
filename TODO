@@ -1,0 +1,36 @@
++ Anonymous roles need work!
+    - We should be able to say Moose::Meta::Role->create_anon_role.
+    - Anonymous roles should not have the same strictures as regular roles
+        * For example, regular roles have to deal with imported functions;
+          anonymous roles shouldn't have to.
+    - Role exclusion is done by name, so anonymous roles should not even be
+      checked. Fix this and t/003-apply.t will pass all of its tests. (Start
+      by just commenting it out :))
+    - The get_method_map and add_method overrides in Meta::Role::Parameterized
+      are a hack. Fix them correctly in Moose.
+
++ We need to reimplement all of the keywords of Moose::Role. So far I have "has"
+  (and added "method" for various reasons). They need to operate on
+  $CURRENT_METACLASS instead of caller.
+
++ There is literally zero documentation.
+
++ A good motivating example. Different serialization formats sucks.
+
++ Moose::Exporter should have a with_meta option which does with_caller but also
+  initializes the metaclass, since that's the most common case for us (and
+  probably others).
+
++ Figure out a plan for alias, excludes, and other parameters that roles
+  currently support.
+    - I'm fine with saying either of:
+        * "You can't have exclusion; make it a parameter"
+        * "You cannot have parameters named alias or excludes; they
+          already have meaning"
+    - The current implementation is closer to the latter. (we pass the args to
+      both parameter construction and parameterized-role application)
+    - We don't enforce that parameters cannot be named alias or excludes though.
+
++ Parameters is an empty superclass. Is there anything interesting we can stick
+  in there?
+
