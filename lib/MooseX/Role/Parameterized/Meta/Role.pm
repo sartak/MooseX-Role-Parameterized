@@ -47,8 +47,7 @@ sub generate_role {
 
     local $MooseX::Role::Parameterized::CURRENT_METACLASS = $metaclass;
     $self->role_generator->($parameters,
-        operating_on       => $metaclass,
-        parameterized_role => $self,
+        operating_on => $metaclass,
     );
 
     my $role = $metaclass->construct_instance;
