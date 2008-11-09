@@ -1,15 +1,15 @@
 #!/usr/bin/env perl
 package MooseX::Role::Parameterized;
-use Moose;
+use Moose qw/extends around confess/;
 use Moose::Role ();
 extends 'Moose::Exporter';
 
 use MooseX::Role::Parameterized::Meta::Role;
 
-our $CURRENT_ROLE;
+our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
-    with_caller => ['parameter', 'role'],
+    with_caller => ['parameter', 'role', 'has'],
 );
 
 sub parameter {
@@ -48,6 +48,20 @@ around _make_wrapper => sub {
 
     return $orig->(@_);
 };
+
+sub has {
+    confess "has must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+
+    my $caller = shift;
+    my $names  = shift;
+
+    $names = [$names] if !ref($names);
+
+    for my $name (@$names) {
+        $CURRENT_METACLASS->add_attribute($name, @_);
+    }
+}
 
 1;
 
