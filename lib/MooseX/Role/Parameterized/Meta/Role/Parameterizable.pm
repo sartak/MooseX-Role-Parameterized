@@ -30,7 +30,7 @@ sub add_parameter {
 
 sub construct_parameters {
     my $self = shift;
-    $self->parameter_metaclass->construct_instance(@_);
+    $self->parameter_metaclass->new_object(@_);
 }
 
 sub generate_role {
@@ -45,7 +45,7 @@ sub generate_role {
     my $metaclass = Moose::Meta::Class->create_anon_class(
         superclasses => ['MooseX::Role::Parameterized::Meta::Role::Parameterized'],
     );
-    my $role = $metaclass->construct_instance(
+    my $role = $metaclass->new_object(
         parameters => $parameters,
     );
 
