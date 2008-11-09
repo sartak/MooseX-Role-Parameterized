@@ -57,6 +57,15 @@ sub generate_role {
     return $role;
 }
 
+sub apply {
+    my $self  = shift;
+    my $class = shift;
+    my %args  = @_;
+
+    my $role = $self->generate_role(%args);
+    $role->apply($class, %args);
+}
+
 __PACKAGE__->meta->make_immutable;
 no Moose;
 
