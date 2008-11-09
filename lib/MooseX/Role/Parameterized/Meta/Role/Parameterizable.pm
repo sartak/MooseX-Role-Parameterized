@@ -3,6 +3,7 @@ package MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 use Moose;
 extends 'Moose::Meta::Role';
 
+use MooseX::Role::Parameterized::Meta::Role::Parameterized;
 use MooseX::Role::Parameterized::Parameters;
 
 has parameter_metaclass => (
@@ -39,12 +40,14 @@ sub generate_role {
     confess "A role generator is required to generate roles"
         unless $self->has_role_generator;
 
-    my $metaclass = Moose::Meta::Class->create_anon_class(
-        superclasses => ['Moose::Meta::Role'],
-    );
-    my $role = $metaclass->construct_instance;
-
     my $parameters = $self->construct_parameters(%args);
+
+    my $metaclass = Moose::Meta::Class->create_anon_class(
+        superclasses => ['MooseX::Role::Parameterized::Meta::Role::Parameterized'],
+    );
+    my $role = $metaclass->construct_instance(
+        parameters => $parameters,
+    );
 
     local $MooseX::Role::Parameterized::CURRENT_METACLASS = $role;
     $self->role_generator->($parameters,
