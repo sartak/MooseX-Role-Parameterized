@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 5;
+use Test::More tests => 7;
 use Test::Exception;
 
 use MooseX::Role::Parameterized::Parameters;
@@ -35,3 +35,12 @@ my $parameter = ($parameter_metaclass->get_all_attributes)[0];
 is($parameter->name, 'length', "parameter name");
 ok($parameter->is_required, "parameter is required");
 
+throws_ok {
+    MyRole::LengthParameter->meta->construct_parameters;
+} qr/^Attribute \(length\) is required/;
+
+$p = MyRole::LengthParameter->meta->construct_parameters(
+    length => 5,
+);
+
+is($p->length, 5, "correct length");

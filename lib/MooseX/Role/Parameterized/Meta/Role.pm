@@ -21,6 +21,11 @@ sub add_parameter {
     $self->parameter_metaclass->add_attribute(@_);
 }
 
+sub construct_parameters {
+    my $self = shift;
+    $self->parameter_metaclass->construct_instance(@_);
+}
+
 __PACKAGE__->meta->make_immutable;
 no Moose;
 
