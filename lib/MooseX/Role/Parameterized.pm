@@ -9,7 +9,8 @@ use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
-    with_caller => ['parameter', 'role', 'has'],
+    with_caller => ['parameter', 'role', 'method'],
+    as_is       => ['has'],
 );
 
 sub parameter {
@@ -53,14 +54,29 @@ sub has {
     confess "has must be called within the role { ... } block."
         unless $CURRENT_METACLASS;
 
-    my $caller = shift;
-    my $names  = shift;
-
+    my $names = shift;
     $names = [$names] if !ref($names);
 
     for my $name (@$names) {
         $CURRENT_METACLASS->add_attribute($name, @_);
     }
+}
+
+sub method {
+    confess "method must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+
+    my $caller = shift;
+    my $name   = shift;
+    my $body   = shift;
+
+    my $method = Moose::Meta::Method->wrap(
+        package_name => $caller,
+        name         => $name,
+        body         => $body,
+    );
+
+    $CURRENT_METACLASS->add_method($name => $method);
 }
 
 1;
