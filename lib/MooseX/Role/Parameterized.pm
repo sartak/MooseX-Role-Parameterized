@@ -70,7 +70,7 @@ sub method {
     my $name   = shift;
     my $body   = shift;
 
-    my $method = Moose::Meta::Method->wrap(
+    my $method = $CURRENT_METACLASS->method_metaclass->wrap(
         package_name => $caller,
         name         => $name,
         body         => $body,

@@ -36,4 +36,3 @@
 + Parameters is an empty superclass. Is there anything interesting we can stick
   in there?
 
-+ Factor out all class names used in methods; use existing class-name methods
