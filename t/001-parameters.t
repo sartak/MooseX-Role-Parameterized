@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More tests => 5;
 use Test::Exception;
 
 use MooseX::Role::Parameterized::Parameters;
@@ -14,6 +14,24 @@ do {
     use MooseX::Role::Parameterized;
 };
 
-my $parameter_class = MyRole::NoParameters->meta->parameter_class;
-ok($parameter_class);
+my $parameter_metaclass = MyRole::NoParameters->meta->parameter_metaclass;
+is($parameter_metaclass->get_all_attributes, 0, "no parameters");
+
+do {
+    package MyRole::LengthParameter;
+    use MooseX::Role::Parameterized;
+
+    parameter length => (
+        is       => 'ro',
+        isa      => 'Int',
+        required => 1,
+    );
+};
+
+$parameter_metaclass = MyRole::LengthParameter->meta->parameter_metaclass;
+is($parameter_metaclass->get_all_attributes, 1, "exactly one parameter");
+
+my $parameter = ($parameter_metaclass->get_all_attributes)[0];
+is($parameter->name, 'length', "parameter name");
+ok($parameter->is_required, "parameter is required");
 
