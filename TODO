@@ -15,6 +15,8 @@
 
 + There is literally zero documentation.
 
++ Tests could be improved too! Failing tests more than welcome.
+
 + A good motivating example. Different serialization formats sucks.
 
 + Moose::Exporter should have a with_meta option which does with_caller but also
@@ -34,3 +36,4 @@
 + Parameters is an empty superclass. Is there anything interesting we can stick
   in there?
 
++ Factor out all class names used in methods; use existing class-name methods
