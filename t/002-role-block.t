@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 5;
+use Test::More tests => 7;
 use Test::Exception;
 
 my ($parameters, %args);
@@ -23,6 +23,11 @@ do {
             is      => 'ro',
             default => $parameters->default_age,
         );
+
+        method birthday => sub {
+            my $self = shift;
+            return 2000 - $self->age;
+        };
     };
 };
 
@@ -40,3 +45,6 @@ is($args{operating_on}, $role, "we pass in the role metaclass that we're operati
 my $age_attr = $role->get_attribute('age');
 is($age_attr->{default}, 7, "role's age attribute has the right default");
 
+my $birthday_method = $role->get_method('birthday');
+is($birthday_method->name, 'birthday', "method name");
+is($birthday_method->package_name, 'MyPerson', "package name");
