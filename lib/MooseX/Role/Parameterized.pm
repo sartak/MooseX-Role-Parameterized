@@ -6,6 +6,8 @@ extends 'Moose::Exporter';
 
 use MooseX::Role::Parameterized::Meta::Role;
 
+our $CURRENT_ROLE;
+
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role'],
 );
