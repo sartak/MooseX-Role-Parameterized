@@ -6,6 +6,8 @@ extends 'Moose::Meta::Role';
 use MooseX::Role::Parameterized::Meta::Role::Parameterized;
 use MooseX::Role::Parameterized::Parameters;
 
+use constant parameterized_role_metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterized';
+
 has parameter_metaclass => (
     is      => 'rw',
     isa     => 'Moose::Meta::Class',
@@ -42,12 +44,7 @@ sub generate_role {
 
     my $parameters = $self->construct_parameters(%args);
 
-    my $metaclass = Moose::Meta::Class->create_anon_class(
-        superclasses => ['MooseX::Role::Parameterized::Meta::Role::Parameterized'],
-    );
-    my $role = $metaclass->new_object(
-        parameters => $parameters,
-    );
+    my $role = $self->parameterized_role_metaclass->create_anon_role(parameters => $parameters);
 
     local $MooseX::Role::Parameterized::CURRENT_METACLASS = $role;
     $self->role_generator->($parameters,
