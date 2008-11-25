@@ -15,7 +15,7 @@ our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role', 'method'],
-    as_is       => ['has', 'extends', 'augment', 'inner'],
+    as_is       => ['has', 'with', 'extends', 'augment', 'inner'],
 );
 
 sub parameter {
@@ -82,6 +82,12 @@ sub method {
     );
 
     $CURRENT_METACLASS->add_method($name => $method);
+}
+
+sub with {
+    confess "with must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+    Moose::Util::apply_all_roles($CURRENT_METACLASS, @_);
 }
 
 sub extends { croak "Roles do not currently support 'extends'" }
