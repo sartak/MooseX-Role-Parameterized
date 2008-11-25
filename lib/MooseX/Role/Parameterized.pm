@@ -1,8 +1,13 @@
 #!/usr/bin/env perl
 package MooseX::Role::Parameterized;
-use Moose qw/extends around confess/;
+use Moose (
+    extends => { -as => 'moose_extends' },
+    qw/around confess/,
+);
+
+use Carp 'croak';
 use Moose::Role ();
-extends 'Moose::Exporter';
+moose_extends 'Moose::Exporter';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
@@ -10,7 +15,7 @@ our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role', 'method'],
-    as_is       => ['has'],
+    as_is       => ['has', 'extends', 'augment', 'inner'],
 );
 
 sub parameter {
@@ -78,6 +83,12 @@ sub method {
 
     $CURRENT_METACLASS->add_method($name => $method);
 }
+
+sub extends { croak "Roles do not currently support 'extends'" }
+
+sub inner { croak "Roles cannot support 'inner'" }
+
+sub augment { croak "Roles cannot support 'augment'" }
 
 1;
 
