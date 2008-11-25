@@ -47,4 +47,4 @@ is($age_attr->{default}, 7, "role's age attribute has the right default");
 
 my $birthday_method = $role->get_method('birthday');
 is($birthday_method->name, 'birthday', "method name");
-is($birthday_method->package_name, 'MyPerson', "package name");
+is($birthday_method->package_name, $role->name, "package name");
