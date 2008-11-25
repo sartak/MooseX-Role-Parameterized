@@ -15,7 +15,7 @@ our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role', 'method'],
-    as_is       => ['has', 'with', 'extends', 'requires', 'augment', 'inner'],
+    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner'],
 );
 
 sub parameter {
@@ -95,6 +95,13 @@ sub requires {
         unless $CURRENT_METACLASS;
     croak "Must specify at least one method" unless @_;
     $CURRENT_METACLASS->add_required_methods(@_);
+}
+
+sub excludes {
+    confess "excludes must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+    croak "Must specify at least one role" unless @_;
+    $CURRENT_METACLASS->add_excluded_roles(@_);
 }
 
 sub extends { croak "Roles do not currently support 'extends'" }
