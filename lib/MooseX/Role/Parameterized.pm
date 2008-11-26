@@ -3,7 +3,7 @@ package MooseX::Role::Parameterized;
 use Moose (
     extends => { -as => 'moose_extends' },
     around => { -as => 'moose_around' },
-    'confess',
+    qw/confess blessed/,
 );
 
 use Carp 'croak';
@@ -16,7 +16,7 @@ our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role', 'method'],
-    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner', 'before', 'after', 'around', 'super', 'override'],
+    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner', 'before', 'after', 'around', 'super', 'override', 'confess', 'blessed'],
 );
 
 sub parameter {
