@@ -37,12 +37,12 @@ sub construct_parameters {
 
 sub generate_role {
     my $self = shift;
-    my %args = @_;
+
+    my $parameters = @_ == 1 ? shift
+                             : $self->construct_parameters(@_);
 
     confess "A role generator is required to generate roles"
         unless $self->has_role_generator;
-
-    my $parameters = $self->construct_parameters(%args);
 
     my $role = $self->parameterized_role_metaclass->create_anon_role(parameters => $parameters);
 
