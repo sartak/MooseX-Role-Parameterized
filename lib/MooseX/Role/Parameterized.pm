@@ -16,7 +16,7 @@ our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role', 'method'],
-    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner', 'before', 'after', 'around'],
+    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner', 'before', 'after', 'around', 'super', 'override'],
 );
 
 sub parameter {
@@ -148,6 +148,20 @@ sub excludes {
         unless $CURRENT_METACLASS;
     croak "Must specify at least one role" unless @_;
     $CURRENT_METACLASS->add_excluded_roles(@_);
+}
+
+# see Moose.pm for discussion
+sub super {
+    return unless $Moose::SUPER_BODY;
+    $Moose::SUPER_BODY->(@Moose::SUPER_ARGS);
+}
+
+sub override {
+    confess "override must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+
+    my ($name, $code) = @_;
+    $CURRENT_METACLASS->add_override_method_modifier($name, $code);
 }
 
 sub extends { croak "Roles do not currently support 'extends'" }
