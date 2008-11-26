@@ -2,7 +2,8 @@
 package MooseX::Role::Parameterized;
 use Moose (
     extends => { -as => 'moose_extends' },
-    qw/around confess/,
+    around => { -as => 'moose_around' },
+    'confess',
 );
 
 use Carp 'croak';
@@ -15,7 +16,7 @@ our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role', 'method'],
-    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner'],
+    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner', 'before', 'after', 'around'],
 );
 
 sub parameter {
@@ -44,7 +45,7 @@ sub init_meta {
 }
 
 # give role a (&) prototype
-around _make_wrapper => sub {
+moose_around _make_wrapper => sub {
     my $orig = shift;
     my ($self, $caller, $sub, $fq_name) = @_;
 
@@ -82,6 +83,51 @@ sub method {
     );
 
     $CURRENT_METACLASS->add_method($name => $method);
+}
+
+sub before {
+    confess "before must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+
+    my $code = pop @_;
+
+    for (@_) {
+        croak "Roles do not currently support "
+            . ref($_)
+            . " references for before method modifiers"
+            if ref $_;
+        $CURRENT_METACLASS->add_before_method_modifier($_, $code);
+    }
+}
+
+sub after {
+    confess "after must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+
+    my $code = pop @_;
+
+    for (@_) {
+        croak "Roles do not currently support "
+            . ref($_)
+            . " references for after method modifiers"
+            if ref $_;
+        $CURRENT_METACLASS->add_after_method_modifier($_, $code);
+    }
+}
+
+sub around {
+    confess "around must be called within the role { ... } block."
+        unless $CURRENT_METACLASS;
+
+    my $code = pop @_;
+
+    for (@_) {
+        croak "Roles do not currently support "
+            . ref($_)
+            . " references for around method modifiers"
+            if ref $_;
+        $CURRENT_METACLASS->add_around_method_modifier($_, $code);
+    }
 }
 
 sub with {
