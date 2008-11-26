@@ -1,7 +1,3 @@
-+ We need to reimplement all of the keywords of Moose::Role. So far I have "has"
-  (and added "method" for various reasons). They need to operate on
-  $CURRENT_METACLASS instead of caller.
-
 + There is literally zero documentation.
 
 + Tests could be improved too! Failing tests more than welcome.
