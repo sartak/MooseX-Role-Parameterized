@@ -1,8 +1,10 @@
-#!/usr/bin/env perl
 package MooseX::Role::Parameterized;
+
+# ABSTRACT: parameterized roles, at long last
+
 use Moose (
     extends => { -as => 'moose_extends' },
-    around => { -as => 'moose_around' },
+    around  => { -as => 'moose_around' },
     qw/confess blessed/,
 );
 
@@ -16,7 +18,11 @@ our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
     with_caller => ['parameter', 'role', 'method'],
-    as_is       => ['has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner', 'before', 'after', 'around', 'super', 'override', 'confess', 'blessed'],
+    as_is       => [
+        'has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner',
+        'before', 'after', 'around', 'super', 'override', 'confess',
+        'blessed',
+    ],
 );
 
 sub parameter {
@@ -173,10 +179,6 @@ sub augment { croak "Roles cannot support 'augment'" }
 1;
 
 __END__
-
-=head1 NAME
-
-MooseX::Role::Parameterized - parameterized roles, at long last
 
 =head1 SYNOPSIS
 
