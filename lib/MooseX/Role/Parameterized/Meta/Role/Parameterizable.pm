@@ -27,12 +27,27 @@ has role_generator => (
 
 sub add_parameter {
     my $self = shift;
-    $self->parameter_metaclass->add_attribute(@_);
+    my $name = shift;
+
+    # need to figure out a plan for these guys..
+    confess "The parameter name ($name) is currently forbidden."
+        if $name eq 'alias'
+        || $name eq 'excludes';
+
+    $self->parameter_metaclass->add_attribute($name => @_);
 }
 
 sub construct_parameters {
     my $self = shift;
-    $self->parameter_metaclass->new_object(@_);
+    my %args = @_;
+
+    # need to figure out a plan for these guys..
+    for my $name ('alias', 'excludes') {
+        confess "The parameter name ($name) is currently forbidden."
+            if exists $args{$name};
+    }
+
+    $self->parameter_metaclass->new_object(\%args);
 }
 
 sub generate_role {
