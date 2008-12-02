@@ -2,8 +2,6 @@ package MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 use Moose;
 extends 'Moose::Meta::Role';
 
-# ABSTRACT: metaclass for parameterizable roles
-
 use MooseX::Role::Parameterized::Meta::Role::Parameterized;
 use MooseX::Role::Parameterized::Parameters;
 
@@ -85,6 +83,10 @@ no Moose;
 1;
 
 __END__
+
+=head1 NAME
+
+MooseX::Role::Parameterized::Meta::Role::Parameterizable - metaclass for parameterizable roles
 
 =head1 DESCRIPTION
 

@@ -1,9 +1,11 @@
 package MooseX::Role::Parameterized::Tutorial;
 confess "Don't use this module, read it!";
 
-# ABSTRACT: why and how
-
 __END__
+
+=head1 NAME
+
+MooseX::Role::Parameterized::Tutorial - why and how
 
 =head1 MOTIVATION
 

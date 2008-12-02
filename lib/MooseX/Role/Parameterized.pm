@@ -1,7 +1,5 @@
 package MooseX::Role::Parameterized;
 
-# ABSTRACT: parameterized roles
-
 use Moose (
     extends => { -as => 'moose_extends' },
     around  => { -as => 'moose_around' },
@@ -179,6 +177,10 @@ sub augment { croak "Roles cannot support 'augment'" }
 1;
 
 __END__
+
+=head1 NAME
+
+MooseX::Role::Parameterized - parameterized roles
 
 =head1 SYNOPSIS
 
