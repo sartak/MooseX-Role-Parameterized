@@ -1,4 +1,3 @@
-#!/usr/bin/env perl
 package MooseX::Role::Parameterized::Parameters;
 use Moose;
 
