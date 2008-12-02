@@ -241,8 +241,8 @@ customizable!
 
 There are many paths to parameterized roles (hopefully with a consistent enough
 API); I believe this to be the easiest and most flexible implementation.
-Coincidentally, Pugs has a very similar design (I'm not convinced that that is
-a good thing yet).
+Coincidentally, Pugs has a very similar design (I'm not yet convinced that that
+is a good thing).
 
 =head1 CAVEATS
 
