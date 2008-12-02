@@ -250,9 +250,16 @@ You must use this syntax to declare methods in the role block:
 C<method NAME => sub { ... };>. This is due to a limitation in Perl. In return
 though you can use parameters I<in your methods>!
 
-L<Moose::Role/alias> and L<Moose::Role/excludes> are not yet supported. Because
-I'm totally unsure of whether they should be handled by this module, both
-declaring and providing a parameter named C<alias> or C<excludes> is an error.
+You must use all the keywords in the role block. If it turns out to be correct,
+we'll compose the parameterizable role (everything outside the role block) with
+the parameterized role (everything inside the role block). We throw an error if
+you try to use a keyword outside of the role block, so don't worry about it for
+now.
+
+L<Moose::Role/alias> and L<Moose::Role/excludes> are not yet supported. I'm
+completely unsure of whether they should be handled by this module. Until we
+figure out a plan, both declaring and providing a parameter named C<alias> or
+C<excludes> is an error.
 
 =head1 AUTHOR
 
