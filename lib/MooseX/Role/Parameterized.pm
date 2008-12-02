@@ -1,6 +1,6 @@
 package MooseX::Role::Parameterized;
 
-# ABSTRACT: parameterized roles, at long last
+# ABSTRACT: parameterized roles
 
 use Moose (
     extends => { -as => 'moose_extends' },
