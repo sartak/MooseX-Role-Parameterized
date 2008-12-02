@@ -84,3 +84,15 @@ no Moose;
 
 1;
 
+__END__
+
+=head1 DESCRIPTION
+
+This is the metaclass for parameteriz-able roles, roles that have their
+parameters currently unbound. These are the roles that you use L<Moose/with>,
+but instead of composing the parameteriz-able role, we construct a new
+parameteriz-ed role
+(L<MooseX::Role::Parameterized::Meta::Role::Parameterized>).
+
+=cut
+
