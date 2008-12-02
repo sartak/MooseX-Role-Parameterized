@@ -249,8 +249,8 @@ is a good thing).
 =head1 CAVEATS
 
 You must use this syntax to declare methods in the role block:
-C<method NAME => sub { ... };>. This is due to a limitation in Perl. In return
-though you can use parameters I<in your methods>!
+C<< method NAME => sub { ... }; >>. This is due to a limitation in Perl. In
+return though you can use parameters I<in your methods>!
 
 You must use all the keywords in the role block. If it turns out to be correct,
 we'll compose the parameterizable role (everything outside the role block) with
