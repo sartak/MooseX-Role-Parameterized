@@ -172,3 +172,89 @@ sub augment { croak "Roles cannot support 'augment'" }
 
 1;
 
+__END__
+
+=head1 NAME
+
+MooseX::Role::Parameterized - parameterized roles, at long last
+
+=head1 SYNOPSIS
+
+    package MyRole::Counter;
+    use MooseX::Role::Parameterized;
+
+    parameter name => (
+        is       => 'ro',
+        isa      => 'Str',
+        required => 1,
+    );
+
+    role {
+        my $p = shift;
+
+        my $name = $p->name;
+
+        has $name => (
+            is      => 'rw',
+            isa     => 'Int',
+            default => 0,
+        );
+
+        method "increment_$name" => sub {
+            my $self = shift;
+            $self->$name($self->$name + 1);
+        };
+
+        method "decrement_$name" => sub {
+            my $self = shift;
+            $self->$name($self->$name - 1);
+        };
+    };
+
+    package MyGame::Tile;
+    use Moose;
+
+    with 'MyRole::Counter' => { name => 'stepped_on' };
+
+=head1 L<MooseX::Role::Parameterized::Tutorial>
+
+B<Stop!> If you're new here, please read
+L<MooseX::Role::Parameterized::Tutorial>.
+
+=head1 DESCRIPTION
+
+Your parameterized role consists of two things: parameter declarations and a
+C<role> block.
+
+Parameters are declared using the L</parameter> keyword which very much
+resembles L<Moose/has>. You can use any option that L<Moose/has> accepts.
+These parameters will get their values when the consuming class (or role) uses
+L<Moose/with>. A parameter object will be constructed with these values, and
+passed to the C<role> block.
+
+The C<role> block then uses the usual L<Moose::Role> keywords to build up a
+role. You can shift off the parameter object to inspect what the consuming
+class provided as parameters. You can use the parameters to make your role
+customizable!
+
+There are many paths to parameterized roles (hopefully with a consistent enough
+API); I believe this to be the easiest and most flexible implementation.
+Coincidentally, Pugs has a very similar design (I'm not convinced that that is
+a good thing yet).
+
+=head1 CAVEATS
+
+You must use this syntax to declare methods in the role block:
+C<method NAME => sub { ... };>. This is due to a limitation in Perl. In return
+though you can use parameters I<in your methods>!
+
+L<Moose::Role/alias> and L<Moose::Role/excludes> are not yet supported. Because
+I'm totally unsure of whether they should be handled by this module, both
+declaring and providing a parameter named C<alias> or C<excludes> is an error.
+
+=head1 AUTHOR
+
+Shawn M Moore, C<< <sartak@bestpractical.com> >>
+
+=cut
+
