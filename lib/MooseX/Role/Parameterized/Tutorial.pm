@@ -60,9 +60,9 @@ then passed to...
 =head3 C<role>
 
 C<role> takes a block of code that will be used to generate your role with its
-parameters bound. Here is where you put your regular role code: use C<has>,
-method modifiers, and so on. You receive as an argument the parameter object
-constructed by C<with>. You can access the parameters just like regular
+parameters bound. Here is where you declare parameterized components: use
+C<has>, method modifiers, and so on. You receive as an argument the parameter
+object constructed by C<with>. You can access the parameters just like regular
 attributes on that object (assuming you declared them readable).
 
 Each time you compose this parameterized role, the role {} block will be
