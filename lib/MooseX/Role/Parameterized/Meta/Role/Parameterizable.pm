@@ -62,7 +62,7 @@ sub generate_role {
 
     local $MooseX::Role::Parameterized::CURRENT_METACLASS = $role;
 
-    $self->apply_parameterized_role($role);
+    $self->apply_parameterizable_role($role);
 
     $self->role_generator->($parameters,
         operating_on => $role,
@@ -80,7 +80,7 @@ sub apply {
     $role->apply($class, %args);
 }
 
-sub apply_parameterized_role {
+sub apply_parameterizable_role {
     my $self = shift;
 
     $self->SUPER::apply(@_);
