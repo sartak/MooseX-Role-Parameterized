@@ -15,22 +15,21 @@ use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 our $CURRENT_METACLASS;
 
 __PACKAGE__->setup_import_methods(
-    with_caller => ['parameter', 'role', 'method'],
-    as_is       => [
-        'has', 'with', 'extends', 'requires', 'excludes', 'augment', 'inner',
-        'before', 'after', 'around', 'super', 'override', 'confess',
-        'blessed',
-    ],
+    with_caller => ['parameter', 'role', 'method', 'has', 'with', 'extends',
+                    'requires', 'excludes', 'augment', 'inner', 'before',
+                    'after', 'around', 'super', 'override'],
+    as_is => [ 'confess', 'blessed' ],
 );
 
 sub parameter {
     my $caller = shift;
-    my $names  = shift;
+    my $meta   = Class::MOP::Class->initialize($caller);
 
+    my $names = shift;
     $names = [$names] if !ref($names);
 
     for my $name (@$names) {
-        Class::MOP::Class->initialize($caller)->add_parameter($name, @_);
+        $meta->add_parameter($name, @_);
     }
 }
 
@@ -61,37 +60,36 @@ moose_around _make_wrapper => sub {
 };
 
 sub has {
-    confess "has must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
 
     my $names = shift;
     $names = [$names] if !ref($names);
 
     for my $name (@$names) {
-        $CURRENT_METACLASS->add_attribute($name, @_);
+        $meta->add_attribute($name, @_);
     }
 }
 
 sub method {
-    confess "method must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
-
     my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+
     my $name   = shift;
     my $body   = shift;
 
-    my $method = $CURRENT_METACLASS->method_metaclass->wrap(
+    my $method = $meta->method_metaclass->wrap(
         package_name => $caller,
         name         => $name,
         body         => $body,
     );
 
-    $CURRENT_METACLASS->add_method($name => $method);
+    $meta->add_method($name => $method);
 }
 
 sub before {
-    confess "before must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
 
     my $code = pop @_;
 
@@ -100,13 +98,13 @@ sub before {
             . ref($_)
             . " references for before method modifiers"
             if ref $_;
-        $CURRENT_METACLASS->add_before_method_modifier($_, $code);
+        $meta->add_before_method_modifier($_, $code);
     }
 }
 
 sub after {
-    confess "after must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
 
     my $code = pop @_;
 
@@ -115,13 +113,13 @@ sub after {
             . ref($_)
             . " references for after method modifiers"
             if ref $_;
-        $CURRENT_METACLASS->add_after_method_modifier($_, $code);
+        $meta->add_after_method_modifier($_, $code);
     }
 }
 
 sub around {
-    confess "around must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
 
     my $code = pop @_;
 
@@ -130,28 +128,31 @@ sub around {
             . ref($_)
             . " references for around method modifiers"
             if ref $_;
-        $CURRENT_METACLASS->add_around_method_modifier($_, $code);
+        $meta->add_around_method_modifier($_, $code);
     }
 }
 
 sub with {
-    confess "with must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
-    Moose::Util::apply_all_roles($CURRENT_METACLASS, @_);
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+
+    Moose::Util::apply_all_roles($meta, @_);
 }
 
 sub requires {
-    confess "requires must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+
     croak "Must specify at least one method" unless @_;
-    $CURRENT_METACLASS->add_required_methods(@_);
+    $meta->add_required_methods(@_);
 }
 
 sub excludes {
-    confess "excludes must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+
     croak "Must specify at least one role" unless @_;
-    $CURRENT_METACLASS->add_excluded_roles(@_);
+    $meta->add_excluded_roles(@_);
 }
 
 # see Moose.pm for discussion
@@ -161,11 +162,11 @@ sub super {
 }
 
 sub override {
-    confess "override must be called within the role { ... } block."
-        unless $CURRENT_METACLASS;
+    my $caller = shift;
+    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
 
     my ($name, $code) = @_;
-    $CURRENT_METACLASS->add_override_method_modifier($name, $code);
+    $meta->add_override_method_modifier($name, $code);
 }
 
 sub extends { croak "Roles do not currently support 'extends'" }
