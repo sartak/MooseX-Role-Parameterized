@@ -2,8 +2,7 @@
 use strict;
 use warnings;
 
-#use Test::More tests => 3;
-use Test::More skip_all => 'TODO';
+use Test::More tests => 3;
 use Test::Moose;
 
 {
@@ -24,7 +23,7 @@ does_ok( 'MyClass', 'MyPRole', 'class does the parameterized role' );
 cmp_ok(
     $generated_role->meta->get_roles->[0]->name,
     'eq',
-    'MyProle',
+    'MyPRole',
     'generated role does the parameterized role'
 );
 

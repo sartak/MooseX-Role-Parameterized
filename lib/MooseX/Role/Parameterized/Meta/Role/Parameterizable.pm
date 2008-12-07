@@ -61,6 +61,9 @@ sub generate_role {
     my $role = $self->parameterized_role_metaclass->create_anon_role(parameters => $parameters);
 
     local $MooseX::Role::Parameterized::CURRENT_METACLASS = $role;
+
+    $self->apply_parameterized_role($role);
+
     $self->role_generator->($parameters,
         operating_on => $role,
     );
@@ -75,6 +78,12 @@ sub apply {
 
     my $role = $self->generate_role(%args);
     $role->apply($class, %args);
+}
+
+sub apply_parameterized_role {
+    my $self = shift;
+
+    $self->SUPER::apply(@_);
 }
 
 __PACKAGE__->meta->make_immutable;
