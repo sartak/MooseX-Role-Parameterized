@@ -1,14 +1,12 @@
 package MooseX::Role::Parameterized;
-
 use Moose (
     extends => { -as => 'moose_extends' },
     around  => { -as => 'moose_around' },
     qw/confess blessed/,
 );
-
-use Carp 'croak';
-use Moose::Role ();
 moose_extends 'Moose::Exporter';
+
+use Moose::Role ();
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
@@ -94,7 +92,7 @@ sub before {
     my $code = pop @_;
 
     for (@_) {
-        croak "Roles do not currently support "
+        Carp::croak "Roles do not currently support "
             . ref($_)
             . " references for before method modifiers"
             if ref $_;
@@ -109,7 +107,7 @@ sub after {
     my $code = pop @_;
 
     for (@_) {
-        croak "Roles do not currently support "
+        Carp::croak "Roles do not currently support "
             . ref($_)
             . " references for after method modifiers"
             if ref $_;
@@ -124,7 +122,7 @@ sub around {
     my $code = pop @_;
 
     for (@_) {
-        croak "Roles do not currently support "
+        Carp::croak "Roles do not currently support "
             . ref($_)
             . " references for around method modifiers"
             if ref $_;
@@ -143,7 +141,7 @@ sub requires {
     my $caller = shift;
     my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
 
-    croak "Must specify at least one method" unless @_;
+    Carp::croak "Must specify at least one method" unless @_;
     $meta->add_required_methods(@_);
 }
 
@@ -151,7 +149,7 @@ sub excludes {
     my $caller = shift;
     my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
 
-    croak "Must specify at least one role" unless @_;
+    Carp::croak "Must specify at least one role" unless @_;
     $meta->add_excluded_roles(@_);
 }
 
@@ -169,11 +167,11 @@ sub override {
     $meta->add_override_method_modifier($name, $code);
 }
 
-sub extends { croak "Roles do not currently support 'extends'" }
+sub extends { Carp::croak "Roles do not currently support 'extends'" }
 
-sub inner { croak "Roles cannot support 'inner'" }
+sub inner { Carp::croak "Roles cannot support 'inner'" }
 
-sub augment { croak "Roles cannot support 'augment'" }
+sub augment { Carp::croak "Roles cannot support 'augment'" }
 
 1;
 
