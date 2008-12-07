@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 7;
+use Test::More tests => 8;
 use Test::Exception;
 
 my ($parameters, %args);
@@ -38,6 +38,8 @@ my $role = MyPerson->meta->generate_role(
 );
 
 isa_ok($role, 'Moose::Meta::Role', 'generate_role created a role');
+
+is($role->parameters, $parameters, 'the generated role knows its parameters');
 
 is($parameters->default_age, 7);
 is($args{operating_on}, $role, "we pass in the role metaclass that we're operating on");
