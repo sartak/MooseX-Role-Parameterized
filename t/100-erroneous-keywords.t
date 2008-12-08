@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 4;
+use Test::More tests => 5;
 
 use Test::Exception;
 
@@ -23,6 +23,9 @@ do {
         ::throws_ok {
             augment()
         } qr/^Roles cannot support 'augment'/;
+        ::throws_ok {
+            parameter()
+        } qr/^'parameter' may not be used inside of the role block/;
     };
 };
 

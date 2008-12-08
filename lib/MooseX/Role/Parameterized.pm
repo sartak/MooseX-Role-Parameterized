@@ -21,6 +21,10 @@ __PACKAGE__->setup_import_methods(
 
 sub parameter {
     my $caller = shift;
+
+    confess "'parameter' may not be used inside of the role block"
+        if $CURRENT_METACLASS;
+
     my $meta   = Class::MOP::Class->initialize($caller);
 
     my $names = shift;
