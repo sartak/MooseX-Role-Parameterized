@@ -32,7 +32,7 @@ sub add_parameter {
         if !defined($name);
 
     # need to figure out a plan for these guys..
-    confess "The parameter name ($name) is currently forbidden."
+    confess "The parameter name ($name) is currently forbidden"
         if $name eq 'alias'
         || $name eq 'excludes';
 
@@ -45,7 +45,7 @@ sub construct_parameters {
 
     # need to figure out a plan for these guys..
     for my $name ('alias', 'excludes') {
-        confess "The parameter name ($name) is currently forbidden."
+        confess "The parameter name ($name) is currently forbidden"
             if exists $args{$name};
     }
 
