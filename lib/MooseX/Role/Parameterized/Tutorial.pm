@@ -20,10 +20,10 @@ you don't want or need (see L<Moose::Cookbook::Roles::Recipe2> for more
 about C<alias> and C<excludes>).
 
 Because roles serve many different masters, they usually provide only the least
-common denominator of functionality. Not all consumers of a role have a C<>.
-Thus, more configurability than C<alias> and C<excludes> is required. Perhaps
-your role needs to know which method to call when it is done. Or what default
-value to use for its url attribute.
+common denominator of functionality. To empower roles further, more
+configurability than C<alias> and C<excludes> is required. Perhaps your role
+needs to know which method to call when it is done. Or what default value to
+use for its url attribute.
 
 Parameterized roles offer exactly this solution.
 
