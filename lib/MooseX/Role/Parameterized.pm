@@ -260,5 +260,9 @@ C<excludes> is an error.
 
 Shawn M Moore, C<< <sartak@bestpractical.com> >>
 
+=head1 SEE ALSO
+
+L<MooseX::Role::Matcher>
+
 =cut
 
