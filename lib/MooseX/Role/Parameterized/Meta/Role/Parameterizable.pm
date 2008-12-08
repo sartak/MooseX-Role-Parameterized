@@ -28,6 +28,9 @@ sub add_parameter {
     my $self = shift;
     my $name = shift;
 
+    confess "You must provide a name for the parameter"
+        if !defined($name);
+
     # need to figure out a plan for these guys..
     confess "The parameter name ($name) is currently forbidden."
         if $name eq 'alias'

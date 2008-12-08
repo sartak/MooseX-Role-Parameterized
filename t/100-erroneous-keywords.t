@@ -1,13 +1,17 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More tests => 4;
 
 use Test::Exception;
 
 do {
     package MyRole::Storage;
     use MooseX::Role::Parameterized;
+
+    ::throws_ok {
+        parameter()
+    } qr/^You must provide a name for the parameter/;
 
     role {
         ::throws_ok {
