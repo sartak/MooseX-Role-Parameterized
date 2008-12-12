@@ -70,9 +70,9 @@ executed. It will receive a new parameter object and produce an entirely new
 role.
 
 Due to limitations inherent in Perl, you must declare methods with
-C<method name => sub { ... }> instead of the usual C<sub name { ... }>. Your
-methods may, of course, close over the parameter object. This means that your
-methods may use parameters however they wish!
+C<< method name => sub { ... } >> instead of the usual C<sub name { ... }>.
+Your methods may, of course, close over the parameter object. This means that
+your methods may use parameters however they wish!
 
 =head1 IMPLEMENTATION NOTES
 
