@@ -32,17 +32,17 @@ do {
         traits => [
             'MyTrait::Label' => { default => 'yay' },
         ],
-        is  => 'rw',
-        isa => 'Str',
     );
 };
 
 do {
     package MyClass::LabeledURL::Redux;
     use Moose;
-    extends 'MyClass::LabeledURL';
 
-    has '+url' => (
+    has 'url' => (
+        traits => [
+            'MyTrait::Label' => { default => 'yay' },
+        ],
         label => 'overridden',
     );
 };
