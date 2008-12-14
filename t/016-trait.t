@@ -1,8 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More skip_all => "Moose doesn't yet support traits with parameters";
-#use Test::More tests => 2;
+use Test::More tests => 2;
 
 do {
     package MyTrait::Label;
