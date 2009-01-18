@@ -1,8 +1,4 @@
 package MooseX::Role::Parameterized::Parameters;
-# XXX: Mister Wizard, what's the right way to declare a different attribute metaclass?
-use metaclass 'Moose::Meta::Class' => (
-    attribute_metaclass => 'MooseX::Role::Parameterized::Meta::Parameter',
-);
 use Moose;
 
 __PACKAGE__->meta->make_immutable;

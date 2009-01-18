@@ -3,17 +3,23 @@ use Moose;
 extends 'Moose::Meta::Role';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterized;
+use MooseX::Role::Parameterized::Meta::Parameter;
 use MooseX::Role::Parameterized::Parameters;
 
 use constant parameterized_role_metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterized';
+use constant parameter_metaclass => 'MooseX::Role::Parameterized::Meta::Parameter';
+use constant parameters_class => 'MooseX::Role::Parameterized::Parameters';
 
 has parameters_metaclass => (
     is      => 'rw',
     isa     => 'Moose::Meta::Class',
     lazy    => 1,
     default => sub {
-        Moose::Meta::Class->create_anon_class(
-            superclasses => ['MooseX::Role::Parameterized::Parameters'],
+        my $self = shift;
+
+        $self->parameters_class->meta->create_anon_class(
+            superclasses        => [$self->parameters_class],
+            attribute_metaclass => $self->parameter_metaclass,
         );
     },
 );
