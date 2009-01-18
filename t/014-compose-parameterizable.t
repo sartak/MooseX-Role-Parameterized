@@ -8,7 +8,6 @@ do {
     use MooseX::Role::Parameterized;
 
     parameter attribute => (
-        is  => 'ro',
         isa => 'Str',
     );
 

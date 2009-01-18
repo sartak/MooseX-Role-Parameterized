@@ -10,20 +10,17 @@ do {
     use Moose::Util::TypeConstraints;
 
     parameter format => (
-        is       => 'ro',
         isa      => (enum ['Dumper', 'Storable']),
         required => 1,
     );
 
     parameter freeze_method => (
-        is      => 'ro',
         isa     => 'Str',
         lazy    => 1,
         default => sub { "freeze_" . shift->format },
     );
 
     parameter thaw_method => (
-        is      => 'ro',
         isa     => 'Str',
         lazy    => 1,
         default => sub { "thaw_" . shift->format },

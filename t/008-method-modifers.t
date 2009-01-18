@@ -10,7 +10,6 @@ do {
     use MooseX::Role::Parameterized;
 
     parameter method => (
-        is       => 'ro',
         isa      => 'Str',
         required => 1,
     );

@@ -20,7 +20,6 @@ do {
         ($parameters, %args) = @_;
 
         has age => (
-            is      => 'ro',
             default => $parameters->default_age,
         );
 

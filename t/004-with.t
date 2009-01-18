@@ -22,7 +22,6 @@ do {
     use MooseX::Role::Parameterized;
 
     parameter slot => (
-        is       => 'ro',
         isa      => 'Str',
         required => 1,
     );

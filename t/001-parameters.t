@@ -22,7 +22,6 @@ do {
     use MooseX::Role::Parameterized;
 
     parameter length => (
-        is       => 'ro',
         isa      => 'Int',
         required => 1,
     );
