@@ -1,5 +1,9 @@
 Changes for MooseX-Role-Parameterized
 
+0.03  Jan 17, 2008
+    * Parameters now default to read-only, so that you no longer have to specify
+      the extremely common case of: is => 'ro'
+
 0.02  Dec 9, 2008
     * Using keywords outside of the role block is now allowed and handled.
 
