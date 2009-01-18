@@ -7,7 +7,7 @@ use MooseX::Role::Parameterized::Parameters;
 
 use constant parameterized_role_metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterized';
 
-has parameter_metaclass => (
+has parameters_metaclass => (
     is      => 'rw',
     isa     => 'Moose::Meta::Class',
     lazy    => 1,
@@ -36,7 +36,7 @@ sub add_parameter {
         if $name eq 'alias'
         || $name eq 'excludes';
 
-    $self->parameter_metaclass->add_attribute($name => @_);
+    $self->parameters_metaclass->add_attribute($name => @_);
 }
 
 sub construct_parameters {
@@ -49,7 +49,7 @@ sub construct_parameters {
             if exists $args{$name};
     }
 
-    $self->parameter_metaclass->new_object(\%args);
+    $self->parameters_metaclass->new_object(\%args);
 }
 
 sub generate_role {

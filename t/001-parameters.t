@@ -14,8 +14,8 @@ do {
     use MooseX::Role::Parameterized;
 };
 
-my $parameter_metaclass = MyRole::NoParameters->meta->parameter_metaclass;
-is($parameter_metaclass->get_all_attributes, 0, "no parameters");
+my $parameters_metaclass = MyRole::NoParameters->meta->parameters_metaclass;
+is($parameters_metaclass->get_all_attributes, 0, "no parameters");
 
 do {
     package MyRole::LengthParameter;
@@ -28,10 +28,10 @@ do {
     );
 };
 
-$parameter_metaclass = MyRole::LengthParameter->meta->parameter_metaclass;
-is($parameter_metaclass->get_all_attributes, 1, "exactly one parameter");
+$parameters_metaclass = MyRole::LengthParameter->meta->parameters_metaclass;
+is($parameters_metaclass->get_all_attributes, 1, "exactly one parameter");
 
-my $parameter = ($parameter_metaclass->get_all_attributes)[0];
+my $parameter = ($parameters_metaclass->get_all_attributes)[0];
 isa_ok($parameter, 'MooseX::Role::Parameterized::Meta::Parameter');
 is($parameter->name, 'length', "parameter name");
 ok($parameter->is_required, "parameter is required");
@@ -60,11 +60,11 @@ do {
     );
 };
 
-$parameter_metaclass = MyRole::LengthParameter->meta->parameter_metaclass;
-is($parameter_metaclass->get_all_attributes, 3, "three parameters");
+$parameters_metaclass = MyRole::LengthParameter->meta->parameters_metaclass;
+is($parameters_metaclass->get_all_attributes, 3, "three parameters");
 
 for my $param_name ('first_name', 'last_name') {
-    my $param = $parameter_metaclass->get_attribute($param_name);
+    my $param = $parameters_metaclass->get_attribute($param_name);
     is($param->type_constraint, 'Str', "$param_name type constraint");
     ok(!$param->is_required, "$param_name is optional");
 }
