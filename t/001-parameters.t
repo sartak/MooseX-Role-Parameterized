@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 12;
+use Test::More tests => 13;
 use Test::Exception;
 
 use MooseX::Role::Parameterized::Parameters;
@@ -44,6 +44,10 @@ $p = MyRole::LengthParameter->meta->construct_parameters(
 );
 
 is($p->length, 5, "correct length");
+
+throws_ok {
+    $p->length(10);
+} qr/^Cannot assign a value to a read-only accessor/;
 
 do {
     package MyRole::LengthParameter;
