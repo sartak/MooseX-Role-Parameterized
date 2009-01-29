@@ -33,7 +33,9 @@ do {
 ok(MyPerson->meta->has_role_generator, "MyPerson has a role generator");
 
 my $role = MyPerson->meta->generate_role(
-    default_age => 7,
+    parameters => {
+        default_age => 7,
+    },
 );
 
 isa_ok($role, 'Moose::Meta::Role', 'generate_role created a role');

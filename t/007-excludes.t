@@ -24,7 +24,11 @@ Moose::Meta::Role->create("Role::B");
 
 sub excludes_roles {
     map {
-        MyRole::Excluder->meta->generate_role(exclude => $_)->name
+        MyRole::Excluder->meta->generate_role(
+            parameters => {
+                exclude => $_,
+            },
+        )->name
     } @_
 }
 

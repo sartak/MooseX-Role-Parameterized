@@ -21,7 +21,11 @@ do {
 
 sub requires_names {
     map {
-        MyRole::Requires->meta->generate_role(requires => $_)->name
+        MyRole::Requires->meta->generate_role(
+            parameters => {
+                requires => $_,
+            },
+        )->name
     } @_
 }
 
