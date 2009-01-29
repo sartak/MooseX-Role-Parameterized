@@ -77,6 +77,7 @@ sub generate_role {
 
     $self->role_generator->($parameters,
         operating_on => $role,
+        consumer     => $args{consumer},
     );
 
     return $role;
