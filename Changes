@@ -1,5 +1,7 @@
 Changes for MooseX-Role-Parameterized
 
+0.05
+
 0.04  Jan 30, 2008
     * The role block now receives as an argument the consuming class or role.
 
