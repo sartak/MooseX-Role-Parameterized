@@ -1,9 +1,10 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 15;
+use Test::More tests => 20;
 use Test::Exception;
 
+my %args;
 do {
     package MyRole::Storage;
     use MooseX::Role::Parameterized;
@@ -28,6 +29,8 @@ do {
 
     role {
         my $p = shift;
+        %args = @_;
+
         my $format = $p->format;
 
         my ($freezer, $thawer);
@@ -63,6 +66,8 @@ do {
 can_ok('MyClass::Dumper' => qw(freeze_Dumper thaw_Dumper));
 cant_ok('MyClass::Dumper' => qw(freeze_Storable thaw_Storable));
 
+is($args{consumer}, MyClass::Dumper->meta, 'Role block receives consumer');
+
 do {
     package MyClass::Storable;
     use Moose;
@@ -73,6 +78,8 @@ do {
 
 can_ok('MyClass::Storable' => qw(freeze_Storable thaw_Storable));
 cant_ok('MyClass::Storable' => qw(freeze_Dumper thaw_Dumper));
+
+is($args{consumer}, MyClass::Storable->meta, 'Role block receives consumer');
 
 do {
     package MyClass::DumperRenamed;
@@ -87,6 +94,8 @@ do {
 can_ok('MyClass::DumperRenamed' => qw(save load));
 cant_ok('MyClass::DumperRenamed' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable));
 
+is($args{consumer}, MyClass::DumperRenamed->meta, 'Role block receives consumer');
+
 do {
     package MyClass::Both;
     use Moose;
@@ -95,6 +104,7 @@ do {
 };
 
 can_ok('MyClass::Both' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable));
+is($args{consumer}, MyClass::Both->meta, 'Role block receives consumer');
 
 do {
     package MyClass::Three;
@@ -109,6 +119,7 @@ do {
 };
 
 can_ok('MyClass::Three' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable store dump));
+is($args{consumer}, MyClass::Three->meta, 'Role block receives consumer');
 
 throws_ok {
     package MyClass::Error::Required;
