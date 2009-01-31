@@ -1,5 +1,8 @@
 Changes for MooseX-Role-Parameterized
 
+0.04  Jan 30, 2008
+    * The role block now receives as an argument the consuming class or role.
+
 0.03  Jan 17, 2008
     * Parameters now default to read-only, so that you no longer have to specify
       the extremely common case of: is => 'ro'
