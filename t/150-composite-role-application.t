@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 9;
+use Test::Exception;
 
 do {
     package MyCompositeRoleA;
@@ -48,12 +49,10 @@ do {
          MyCompositeRoleB => { accessor  => 'bar' };
 };
 
-local $@;
-eval {
+lives_ok {
     ok(MyDoubleConsumer->can('foo'), 'first role in composite applied successfully');
     ok(MyDoubleConsumer->can('bar'), 'second role in composite applied successfully');
-}; 
-ok !$@, 'testing composite roles lived';
+} 'testing composite roles lived';
 
 do {
     package MyExtendingRole;
@@ -82,12 +81,10 @@ do {
          MyExtendingRole  => { foo => 23 };
 };
 
-local $@;
-eval {
+lives_ok {
     ok(MyExtendedConsumer->can('bar'), 'role composed through other role applied successfully');
     is(MyExtendedConsumer->new->foo, 23, 'role composing other role applied successfully');
-};
-ok !$@, 'testing role through application through other role lived';
+} 'testing role through application through other role lived';
 
 do {
     package MyRoleProxy;
@@ -117,10 +114,8 @@ do {
     );
 };
 
-local $@;
-eval {
+lives_ok {
     ok(MyProxyConsumer->can('baz'), 'proxied role got applied successfully');
     ok(MyProxyConsumer->can('qux'), 'other role besides proxied one got applied successfully');
-};
-ok !$@, 'testing proxied roles lived';
+} 'testing proxied roles lived';
 
