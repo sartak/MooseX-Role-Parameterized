@@ -264,9 +264,29 @@ C<excludes> is an error.
 
 Shawn M Moore, C<< <sartak@bestpractical.com> >>
 
-=head1 SEE ALSO
+=head1 EXAMPLES
 
-L<MooseX::Role::Matcher>
+=over 4
+
+=item L<MooseX::Role::Matcher>
+
+=item L<MooseX::Role::RelatedClassRoles>
+
+=item L<MooseX::Role::XMLRPC::Client>
+
+=item L<WWW::Mechanize::TreeBuilder>
+
+=item L<TAEB::Action::Role::Item>
+
+=item L<KiokuDB::Role::Scan>
+
+=item L<Fey::Role::MakesAliasObjects>
+
+=item L<Fey::Role::HasAliasName>
+
+=item L<Fey::Role::SetOperation>
+
+=back
 
 =cut
 
