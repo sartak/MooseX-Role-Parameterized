@@ -35,7 +35,7 @@ sub parameter {
     }
 }
 
-sub role {
+sub role (&) {
     my $caller         = shift;
     my $role_generator = shift;
     Class::MOP::Class->initialize($caller)->role_generator($role_generator);
@@ -48,18 +48,6 @@ sub init_meta {
         metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterizable',
     );
 }
-
-# give role a (&) prototype
-moose_around _make_wrapper => sub {
-    my $orig = shift;
-    my ($self, $caller, $sub, $fq_name) = @_;
-
-    if ($fq_name =~ /::role$/) {
-        return sub (&) { $sub->($caller, @_) };
-    }
-
-    return $orig->(@_);
-};
 
 sub has {
     my $caller = shift;
