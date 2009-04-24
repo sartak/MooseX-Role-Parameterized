@@ -1,11 +1,16 @@
 Changes for MooseX-Role-Parameterized
 
-0.05
+0.05  Apr 24, 2009
+    * Use replace_constructor in Meta::Parameter's make_immutable (nothingmuch)
 
-0.04  Jan 30, 2008
+    * The & prototype hack has been obviated by Moose::Exporter goodness (rafl)
+
+    * List examples of MooseX::Role::Parameterized roles (Sartak)
+
+0.04  Jan 30, 2009
     * The role block now receives as an argument the consuming class or role.
 
-0.03  Jan 17, 2008
+0.03  Jan 17, 2009
     * Parameters now default to read-only, so that you no longer have to specify
       the extremely common case of: is => 'ro'
 
