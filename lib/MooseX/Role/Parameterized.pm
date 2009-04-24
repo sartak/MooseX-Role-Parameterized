@@ -258,9 +258,9 @@ Shawn M Moore, C<< <sartak@bestpractical.com> >>
 
 =item L<MooseX::Role::Matcher>
 
-=item L<MooseX::Role::RelatedClassRoles>
-
 =item L<MooseX::Role::XMLRPC::Client>
+
+=item L<MooseX::RelatedClassRoles>
 
 =item L<WWW::Mechanize::TreeBuilder>
 
