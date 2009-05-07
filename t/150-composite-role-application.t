@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
+use Test::More tests => 7;
 use Test::Exception;
 
 do {
@@ -18,7 +18,7 @@ do {
         my $p = shift;
 
         has $p->attribute => (
-            is => 'Int',
+            is => 'rw',
         );
     };
 };
@@ -78,12 +78,13 @@ do {
 do {
     package MyExtendedConsumer;
     use Moose;
-    with MyCompositeRoleA => { attribute => 'bar' },
+    with MyCompositeRoleA => { attribute => 'baz' },
          MyExtendingRole  => { foo => 23 };
 };
 
 TODO: {
     local $TODO = "role-role application for parameterized roles doesn't work yet";
+    ok(MyExtendedConsumer->can('baz'), 'role composed directly applied successfully');
     ok(MyExtendedConsumer->can('bar'), 'role composed through other role applied successfully');
     is(eval { MyExtendedConsumer->new->foo }, 23, 'role composing other role applied successfully');
 };;
