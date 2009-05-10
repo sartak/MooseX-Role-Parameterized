@@ -263,6 +263,8 @@ Shawn M Moore, C<< <sartak@bestpractical.com> >>
 
 =item L<WWW::Mechanize::TreeBuilder>
 
+=item L<NetHack::Item::Role::IncorporatesStats>
+
 =item L<TAEB::Action::Role::Item>
 
 =item L<KiokuDB::Role::Scan>
