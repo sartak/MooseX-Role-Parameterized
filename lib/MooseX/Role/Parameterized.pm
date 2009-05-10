@@ -198,7 +198,7 @@ MooseX::Role::Parameterized - parameterized roles
 =head1 L<MooseX::Role::Parameterized::Tutorial>
 
 B<Stop!> If you're new here, please read
-L<MooseX::Role::Parameterized::Tutorial>.
+L<MooseX::Role::Parameterized::Tutorial> for a much gentler introduction.
 
 =head1 DESCRIPTION
 
