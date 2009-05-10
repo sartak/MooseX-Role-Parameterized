@@ -83,7 +83,7 @@ sub generate_role {
     return $role;
 }
 
-sub role_for_combination {
+sub _role_for_combination {
     my $self = shift;
     my $parameters = shift;
 
