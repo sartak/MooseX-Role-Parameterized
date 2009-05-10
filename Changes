@@ -1,5 +1,11 @@
 Changes for MooseX-Role-Parameterized
 
+0.06
+    * Fix long-standing role-role combination bug, reported by several
+      users (Sartak)
+
+    * Documentation improvements (Sartak)
+
 0.05  Apr 24, 2009
     * Use replace_constructor in Meta::Parameter's make_immutable (nothingmuch)
 
