@@ -217,25 +217,24 @@ L<MooseX::Role::Parameterized::Tutorial>.
 
 =head1 DESCRIPTION
 
-Your parameterized role consists of two things: parameter declarations and a
-C<role> block.
+Your parameterized role consists of two new things: parameter declarations
+and a C<role> block.
 
 Parameters are declared using the L</parameter> keyword which very much
 resembles L<Moose/has>. You can use any option that L<Moose/has> accepts. The
-default value for the "is" option is "ro" as that's a very common case. These
+default value for the C<is> option is C<ro> as that's a very common case. These
 parameters will get their values when the consuming class (or role) uses
 L<Moose/with>. A parameter object will be constructed with these values, and
 passed to the C<role> block.
 
 The C<role> block then uses the usual L<Moose::Role> keywords to build up a
 role. You can shift off the parameter object to inspect what the consuming
-class provided as parameters. You can use the parameters to make your role
-customizable!
+class provided as parameters. You use the parameters to customize your
+role however you wish.
 
-There are many paths to parameterized roles (hopefully with a consistent enough
-API); I believe this to be the easiest and most flexible implementation.
-Coincidentally, Pugs has a very similar design (I'm not yet convinced that that
-is a good thing).
+There are many possible implementations for parameterized roles (hopefully with
+a consistent enough API); I believe this to be the easiest and most flexible
+design. Coincidentally, Pugs has an eerily similar design.
 
 =head1 CAVEATS
 
@@ -245,7 +244,7 @@ return though you can use parameters I<in your methods>!
 
 L<Moose::Role/alias> and L<Moose::Role/excludes> are not yet supported. I'm
 completely unsure of whether they should be handled by this module. Until we
-figure out a plan, both declaring and providing a parameter named C<alias> or
+figure out a plan, either declaring or providing a parameter named C<alias> or
 C<excludes> is an error.
 
 =head1 AUTHOR
