@@ -83,6 +83,15 @@ sub generate_role {
     return $role;
 }
 
+sub role_for_combination {
+    my $self = shift;
+    my $parameters = shift;
+
+    return $self->generate_role(
+        parameters => $parameters,
+    );
+}
+
 sub apply {
     my $self     = shift;
     my $consumer = shift;
