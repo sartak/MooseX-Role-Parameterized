@@ -25,7 +25,7 @@ sub parameter {
     confess "'parameter' may not be used inside of the role block"
         if $CURRENT_METACLASS;
 
-    my $meta   = Class::MOP::Class->initialize($caller);
+    my $meta   = Class::MOP::class_of($caller);
 
     my $names = shift;
     $names = [$names] if !ref($names);
@@ -38,7 +38,7 @@ sub parameter {
 sub role (&) {
     my $caller         = shift;
     my $role_generator = shift;
-    Class::MOP::Class->initialize($caller)->role_generator($role_generator);
+    Class::MOP::class_of($caller)->role_generator($role_generator);
 }
 
 sub init_meta {
@@ -51,7 +51,7 @@ sub init_meta {
 
 sub has {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     my $names = shift;
     $names = [$names] if !ref($names);
@@ -63,7 +63,7 @@ sub has {
 
 sub method {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     my $name   = shift;
     my $body   = shift;
@@ -79,7 +79,7 @@ sub method {
 
 sub before {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     my $code = pop @_;
 
@@ -94,7 +94,7 @@ sub before {
 
 sub after {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     my $code = pop @_;
 
@@ -109,7 +109,7 @@ sub after {
 
 sub around {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     my $code = pop @_;
 
@@ -124,14 +124,14 @@ sub around {
 
 sub with {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     Moose::Util::apply_all_roles($meta, @_);
 }
 
 sub requires {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     Carp::croak "Must specify at least one method" unless @_;
     $meta->add_required_methods(@_);
@@ -139,7 +139,7 @@ sub requires {
 
 sub excludes {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     Carp::croak "Must specify at least one role" unless @_;
     $meta->add_excluded_roles(@_);
@@ -153,7 +153,7 @@ sub super {
 
 sub override {
     my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::Class->initialize($caller);
+    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
     my ($name, $code) = @_;
     $meta->add_override_method_modifier($name, $code);
