@@ -1,7 +1,4 @@
-package MooseX::Role::Parameterized::Tutorial;
-confess "Don't use this module, read it!";
-
-__END__
+=pod
 
 =head1 NAME
 
@@ -10,20 +7,20 @@ MooseX::Role::Parameterized::Tutorial - why and how
 =head1 MOTIVATION
 
 Roles are composable units of behavior. They are useful for factoring out
-functionality common to many classes from any part of your class hierarchy.See
+functionality common to many classes from any part of your class hierarchy. See
 L<Moose::Cookbook::Roles::Recipe1> for an introduction to L<Moose::Role>.
 
 While combining roles affords you a great deal of flexibility, individual roles
-have very little in the way of configurability.  Core Moose provides C<alias>
-for renaming methods to avoid conflicts, and C<excludes> for ignoring methods
-you don't want or need (see L<Moose::Cookbook::Roles::Recipe2> for more
-about C<alias> and C<excludes>).
+have very little in the way of configurability. Core Moose provides C<alias>
+for renaming methods and C<excludes> for ignoring methods. These options are
+primarily (perhaps solely) for disambiguating role conflicts. See
+L<Moose::Cookbook::Roles::Recipe2> for more about C<alias> and C<excludes>.
 
 Because roles serve many different masters, they usually provide only the least
 common denominator of functionality. To empower roles further, more
 configurability than C<alias> and C<excludes> is required. Perhaps your role
 needs to know which method to call when it is done. Or what default value to
-use for its url attribute.
+use for its C<url> attribute.
 
 Parameterized roles offer exactly this solution.
 
@@ -40,6 +37,16 @@ C<excludes> to ordinary roles:
         log_to      => 'query.log',
     };
 
+You can still combine parameterized roles. You just need to specify parameters
+immediately after the role they belong to:
+
+    with (
+        'My::Parameterized::Role' => {
+            needs_better_example => 1,
+        },
+        'My::Other::Role',
+    );
+
 =head3 C<parameter>
 
 Inside your parameterized role, you specify a set of parameters. This is
@@ -51,22 +58,20 @@ the keyword C<parameter>, but your parameters can use any options to C<has>.
         predicate => 'has_delegation',
     );
 
-Behind the scenes, C<parameter> uses C<has> to add attributes to a parameter
-class (except the "is" option defaults to "ro" for convenience). The arguments
-to C<with> are used to construct a parameter object, which has the attributes
-specified by calls to C<parameter>. The parameter object is then passed to...
+You do have to declare what parameters you accept, just like you have to
+declare what attributes you accept for regular Moose objects.
 
 =head3 C<role>
 
 C<role> takes a block of code that will be used to generate your role with its
 parameters bound. Here is where you declare parameterized components: use
-C<has>, method modifiers, and so on. You receive as an argument the parameter
-object constructed by C<with>. You can access the parameters just like regular
-attributes on that object (assuming you declared them readable).
+C<has>, method modifiers, and so on. The C<role> block receives an argument,
+which contains the parameters specified by C<with>. You can access the
+parameters just like regular attributes on that object.
 
 Each time you compose this parameterized role, the role {} block will be
 executed. It will receive a new parameter object and produce an entirely new
-role.
+role. That's the whole point, after all.
 
 Due to limitations inherent in Perl, you must declare methods with
 C<< method name => sub { ... } >> instead of the usual C<sub name { ... }>.
@@ -92,10 +97,20 @@ can now also choose type, default value, whether it's required, B<traits>, etc.
         default => sub { [] },
     );
 
-    has action => (
-        traits => $p->traits,
-        ...
+    parameter type => (
+        isa     => 'Str',
+        default => 'Any',
     );
+
+    role {
+        my $p = shift;
+
+        has action => (
+            traits => $p->traits,
+            isa    => $p->type,
+            ...
+        );
+    }
 
 =item Inform a role of your class' attributes and methods
 
@@ -108,7 +123,10 @@ which attributes to dump to a file.
         required => 1,
     );
 
-    around $p->instrument_method => sub { ... };
+    role {
+        my $p = shift;
+        around $p->instrument_method => sub { ... };
+    }
 
 =item Arbitrary execution choices
 
@@ -121,11 +139,14 @@ states.
         default => 0,
     );
 
-    method process => sub {
-        ...
-        if ($p->save_intermediate) { ... }
-        ...
-    };
+    role {
+        my $p = shift;
+        method process => sub {
+            ...
+            if ($p->save_intermediate) { ... }
+            ...
+        };
+    }
 
 =item Deciding a backend
 
@@ -137,12 +158,18 @@ L<Storable>. Which backend to use can be a parameter.
         default => 'Storable',
     );
 
-    if ($p->format eq 'Storable') {
-        method freeze => sub { ... };
-        method thaw   => sub { ... };
+    role {
+        my $p = shift;
+        if ($p->format eq 'Storable') {
+            method freeze => \&Storable::freeze;
+            method thaw   => \&Storable::thaw;
+        }
+        elsif ($p->format eq 'YAML') {
+            method freeze => \&YAML::Dump;
+            method thaw   => \&YAML::Load;
+        }
+        ...
     }
-    elsif ($p->format eq 'YAML') ...
-    ...
 
 =back
 
