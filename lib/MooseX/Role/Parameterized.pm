@@ -77,7 +77,8 @@ sub method {
     $meta->add_method($name => $method);
 }
 
-sub before {
+sub _add_method_modifier {
+    my $type   = shift;
     my $caller = shift;
     my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
 
@@ -86,40 +87,24 @@ sub before {
     for (@_) {
         Carp::croak "Roles do not currently support "
             . ref($_)
-            . " references for before method modifiers"
+            . " references for $type method modifiers"
             if ref $_;
-        $meta->add_before_method_modifier($_, $code);
+
+        my $add_method = "add_${type}_method_modifier";
+        $meta->$add_method($_, $code);
     }
+}
+
+sub before {
+    _add_method_modifier('before', @_);
 }
 
 sub after {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    my $code = pop @_;
-
-    for (@_) {
-        Carp::croak "Roles do not currently support "
-            . ref($_)
-            . " references for after method modifiers"
-            if ref $_;
-        $meta->add_after_method_modifier($_, $code);
-    }
+    _add_method_modifier('after', @_);
 }
 
 sub around {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    my $code = pop @_;
-
-    for (@_) {
-        Carp::croak "Roles do not currently support "
-            . ref($_)
-            . " references for around method modifiers"
-            if ref $_;
-        $meta->add_around_method_modifier($_, $code);
-    }
+    _add_method_modifier('around', @_);
 }
 
 sub with {
