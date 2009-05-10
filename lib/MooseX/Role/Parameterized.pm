@@ -234,7 +234,22 @@ role however you wish.
 
 There are many possible implementations for parameterized roles (hopefully with
 a consistent enough API); I believe this to be the easiest and most flexible
-design. Coincidentally, Pugs has an eerily similar design.
+design. Coincidentally, Pugs originally had an eerily similar design.
+
+=head2 Why a parameters object?
+
+I've been asked several times "Why use a parameter I<object> and not just a
+parameter I<hashref>? That would eliminate the need to explicitly declare your
+parameters."
+
+The benefits of using an object are similar to the benefits of using Moose. You
+get an easy way to specify lazy defaults, type constraint, delegation, and so
+on. You get to use MooseX modules.
+
+You also get the usual introspective and intercessory abilities that come
+standard with the metaobject protocol. Ambitious users should be able to add
+traits to the parameters metaclass to further customize behavior. Please let
+me know if you're doing anything viciously complicated with this extension. :)
 
 =head1 CAVEATS
 
