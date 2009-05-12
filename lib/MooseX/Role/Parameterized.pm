@@ -277,5 +277,9 @@ Shawn M Moore, C<< <sartak@bestpractical.com> >>
 
 =back
 
+=head1 SEE ALSO
+
+L<http://sartak.blogspot.com/2009/05/parameterized-roles.html>
+
 =cut
 
