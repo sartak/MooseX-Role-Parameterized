@@ -1,5 +1,7 @@
 Changes for MooseX-Role-Parameterized
 
+0.07
+
 0.06  May 12, 2009
     * Fix long-standing role-role combination bug, reported by several
       users (Sartak)
