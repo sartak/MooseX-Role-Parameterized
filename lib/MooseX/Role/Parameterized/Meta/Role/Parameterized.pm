@@ -2,6 +2,8 @@ package MooseX::Role::Parameterized::Meta::Role::Parameterized;
 use Moose;
 extends 'Moose::Meta::Role';
 
+our $VERSION = '0.09';
+
 use MooseX::Role::Parameterized::Parameters;
 
 has parameters => (
