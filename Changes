@@ -1,6 +1,9 @@
 Changes for MooseX-Role-Parameterized
 
 0.07
+    * Leave the jules nest for github (Sartak)
+
+    * Switch to Module::Install (Sartak)
 
 0.06  May 12, 2009
     * Fix long-standing role-role combination bug, reported by several
