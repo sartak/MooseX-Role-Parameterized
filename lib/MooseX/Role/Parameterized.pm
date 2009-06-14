@@ -6,7 +6,7 @@ use Scalar::Util 'blessed';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 our $CURRENT_METACLASS;
 
 Moose::Exporter->setup_import_methods(
