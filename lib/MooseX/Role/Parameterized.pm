@@ -1,18 +1,14 @@
 package MooseX::Role::Parameterized;
-use Moose (
-    extends => { -as => 'moose_extends' },
-    around  => { -as => 'moose_around' },
-    qw/confess blessed/,
-);
-moose_extends 'Moose::Exporter';
-
 use Moose::Role ();
+use Moose::Exporter;
+use Carp 'confess';
+use Scalar::Util 'blessed';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
 our $CURRENT_METACLASS;
 
-__PACKAGE__->setup_import_methods(
+Moose::Exporter->setup_import_methods(
     with_caller => ['parameter', 'role', 'method', 'has', 'with', 'extends',
                     'requires', 'excludes', 'augment', 'inner', 'before',
                     'after', 'around', 'super', 'override'],
