@@ -1,6 +1,9 @@
 Changes for MooseX-Role-Parameterized
 
-0.07
+0.08  Jun 14, 2009
+    * Fix mis-packaging :) (Sartak)
+
+0.07  Jun 14, 2009
     * Leave the jules nest for github (Sartak)
 
     * Switch to Module::Install (Sartak)
