@@ -249,7 +249,7 @@ C<excludes> is an error.
 
 =head1 AUTHOR
 
-Shawn M Moore, C<< <sartak@bestpractical.com> >>
+Shawn M Moore, C<sartak@gmail.com>
 
 =head1 EXAMPLES
 
@@ -280,6 +280,13 @@ Shawn M Moore, C<< <sartak@bestpractical.com> >>
 =head1 SEE ALSO
 
 L<http://sartak.blogspot.com/2009/05/parameterized-roles.html>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2007-2009 Infinity Interactive
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
 
 =cut
 
