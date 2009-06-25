@@ -28,6 +28,7 @@ do {
     use Moose;
 
     has url => (
+        is => 'ro',
         traits => [
             'MyTrait::Label' => { default => 'yay' },
         ],
@@ -39,6 +40,7 @@ do {
     use Moose;
 
     has 'url' => (
+        is => 'ro',
         traits => [
             'MyTrait::Label' => { default => 'yay' },
         ],
