@@ -153,7 +153,7 @@ __END__
 
 =head1 NAME
 
-MooseX::Role::Parameterized - parameterized roles
+MooseX::Role::Parameterized - roles with composition parameters
 
 =head1 SYNOPSIS
 
