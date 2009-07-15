@@ -278,6 +278,8 @@ Shawn M Moore, C<sartak@gmail.com>
 
 L<http://sartak.blogspot.com/2009/05/parameterized-roles.html>
 
+L<http://stevan-little.blogspot.com/2009/07/thoughts-on-parameterized-roles.html>
+
 =head1 COPYRIGHT AND LICENSE
 
 Copyright 2007-2009 Infinity Interactive
