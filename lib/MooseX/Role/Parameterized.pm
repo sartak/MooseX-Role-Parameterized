@@ -277,6 +277,14 @@ Shawn M Moore, C<sartak@gmail.com>
 
 =item L<Fey::Role::SetOperation>
 
+=item L<Fey::Role::SQL::Cloneable>
+
+=item L<Net::Journyx::Object::Loadable>
+
+=item L<IM::Engine::PluggableConstructor>
+
+=item L<IM::Engine::RequiresPlugins>
+
 =back
 
 =head1 SEE ALSO
