@@ -26,7 +26,7 @@ MooseX::Role::Parameterized::Meta::Role::Parameterized - metaclass for parameter
 
 This is the metaclass for parameterized roles; that is, parameterizable roles
 with their parameters bound. All this actually provides is a place to store the
-L<parameters> object.
+L<MooseX::Role::Parameterized::Parameters> object.
 
 =cut
 
