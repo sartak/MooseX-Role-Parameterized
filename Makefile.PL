@@ -7,6 +7,7 @@ all_from       'lib/MooseX/Role/Parameterized.pm';
 githubmeta;
 
 requires       'Moose' => '0.78';
+test_requires  'Test::Moose';
 
 build_requires 'Test::Exception' => '0.27';
 
