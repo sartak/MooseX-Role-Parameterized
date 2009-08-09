@@ -91,7 +91,7 @@ You can rename methods with core Moose, but now you can rename attributes. You
 can now also choose type, default value, whether it's required, B<traits>, etc.
 
     parameter traits => (
-        isa     => 'ArrayRef[Str]',
+        isa     => 'ArrayRef',
         default => sub { [] },
     );
 
