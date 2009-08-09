@@ -19,12 +19,12 @@ MooseX::Role::Parameterized::Parameters - base class for parameters
 This is the base class for parameter objects. Currently empty, but I reserve
 the right to add things here.
 
-Each parameteriz-able role gets their own anonymous subclass of this;
+Each parameterizable role gets their own anonymous subclass of this;
 L<MooseX::Role::Parameterized/parameter> actually operates on these anonymous
 subclasses.
 
-Each parameteriz-ed role gets their own instance of the anonymous subclass
-(owned by the parameteriz-able role).
+Each parameterized role gets their own instance of the anonymous subclass
+(owned by the parameterizable role).
 
 =cut
 

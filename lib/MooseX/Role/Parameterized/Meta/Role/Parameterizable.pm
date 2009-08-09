@@ -126,10 +126,10 @@ MooseX::Role::Parameterized::Meta::Role::Parameterizable - metaclass for paramet
 
 =head1 DESCRIPTION
 
-This is the metaclass for parameteriz-able roles, roles that have their
+This is the metaclass for parameterizable roles, roles that have their
 parameters currently unbound. These are the roles that you use L<Moose/with>,
-but instead of composing the parameteriz-able role, we construct a new
-parameteriz-ed role
+but instead of composing the parameterizable role, we construct a new
+parameterized role
 (L<MooseX::Role::Parameterized::Meta::Role::Parameterized>).
 
 =cut
