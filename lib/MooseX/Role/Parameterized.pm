@@ -210,10 +210,10 @@ and a C<role> block.
 
 Parameters are declared using the L</parameter> keyword which very much
 resembles L<Moose/has>. You can use any option that L<Moose/has> accepts. The
-default value for the C<is> option is C<ro> as that's a very common case. These
-parameters will get their values when the consuming class (or role) uses
-L<Moose/with>. A parameter object will be constructed with these values, and
-passed to the C<role> block.
+default value for the C<is> option is C<ro> as that's a very common case. Use
+C<< is => 'bare' >> if you want no accessor. These parameters will get their
+values when the consuming class (or role) uses L<Moose/with>. A parameter
+object will be constructed with these values, and passed to the C<role> block.
 
 The C<role> block then uses the usual L<Moose::Role> keywords to build up a
 role. You can shift off the parameter object to inspect what the consuming
