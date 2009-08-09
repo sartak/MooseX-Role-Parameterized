@@ -1,5 +1,7 @@
 Changes for MooseX-Role-Parameterized
 
+0.12
+
 0.11  Aug 9, 2009
     * Explicitly test-require Test::Moose for Fedora packaging (RSRCHBOY)
 
