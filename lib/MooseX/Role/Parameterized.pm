@@ -181,16 +181,21 @@ MooseX::Role::Parameterized - roles with composition parameters
             $self->$name($self->$name + 1);
         };
 
-        method "decrement_$name" => sub {
+        method "reset_$name" => sub {
             my $self = shift;
-            $self->$name($self->$name - 1);
+            $self->$name(0);
         };
     };
 
-    package MyGame::Tile;
+    package MyGame::Weapon;
     use Moose;
 
-    with 'MyRole::Counter' => { name => 'stepped_on' };
+    with 'MyRole::Counter' => { name => 'enchantment' };
+
+    package MyGame::Wand;
+    use Moose;
+
+    with 'MyRole::Counter' => { name => 'zapped' };
 
 =head1 L<MooseX::Role::Parameterized::Tutorial>
 
