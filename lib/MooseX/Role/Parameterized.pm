@@ -257,33 +257,33 @@ Shawn M Moore, C<sartak@gmail.com>
 
 =over 4
 
+=item L<Fey::Role::HasAliasName>
+
+=item L<Fey::Role::MakesAliasObjects>
+
+=item L<Fey::Role::SQL::Cloneable>
+
+=item L<Fey::Role::SetOperation>
+
+=item L<IM::Engine::PluggableConstructor>
+
+=item L<IM::Engine::RequiresPlugins>
+
+=item L<KiokuDB::Role::Scan>
+
+=item L<MooseX::RelatedClassRoles>
+
 =item L<MooseX::Role::Matcher>
 
 =item L<MooseX::Role::XMLRPC::Client>
 
-=item L<MooseX::RelatedClassRoles>
-
-=item L<WWW::Mechanize::TreeBuilder>
+=item L<Net::Journyx::Object::Loadable>
 
 =item L<NetHack::Item::Role::IncorporatesStats>
 
 =item L<TAEB::Action::Role::Item>
 
-=item L<KiokuDB::Role::Scan>
-
-=item L<Fey::Role::MakesAliasObjects>
-
-=item L<Fey::Role::HasAliasName>
-
-=item L<Fey::Role::SetOperation>
-
-=item L<Fey::Role::SQL::Cloneable>
-
-=item L<Net::Journyx::Object::Loadable>
-
-=item L<IM::Engine::PluggableConstructor>
-
-=item L<IM::Engine::RequiresPlugins>
+=item L<WWW::Mechanize::TreeBuilder>
 
 =back
 
