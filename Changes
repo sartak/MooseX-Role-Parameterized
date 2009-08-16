@@ -1,6 +1,10 @@
 Changes for MooseX-Role-Parameterized
 
-0.12
+0.12  Aug 15, 2009
+    * Add MooseX::Role::Parameterized->current_metaclass for forward compat
+      (Sartak)
+
+    * Various documentation improvements (Sartak)
 
 0.11  Aug 9, 2009
     * Explicitly test-require Test::Moose for Fedora packaging (RSRCHBOY)
