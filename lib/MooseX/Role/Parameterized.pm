@@ -17,6 +17,8 @@ Moose::Exporter->setup_import_methods(
     as_is => [ 'confess', 'blessed' ],
 );
 
+sub current_metaclass { $CURRENT_METACLASS }
+
 sub parameter {
     my $caller = shift;
 
