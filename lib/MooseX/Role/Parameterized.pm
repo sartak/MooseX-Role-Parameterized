@@ -280,6 +280,8 @@ Shawn M Moore, C<sartak@gmail.com>
 
 =item L<MooseX::Role::XMLRPC::Client>
 
+=item L<MooseX::WithCache>
+
 =item L<Net::Journyx::Object::Loadable>
 
 =item L<NetHack::Item::Role::IncorporatesStats>
