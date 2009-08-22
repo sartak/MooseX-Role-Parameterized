@@ -169,6 +169,32 @@ L<Storable>. Which backend to use can be a parameter.
         ...
     }
 
+=item Additional validation
+
+Ordinary roles can require that its consumers have a particular list of method
+names. Since parameterized roles have direct access to its consumer, you can inspect it and throw errors if the consumer does not meet your needs.
+
+    role {
+        my $p    = shift;
+        my %args = @_;
+        my $consumer = $args{consumer};
+
+        $consumer->find_attribute_by_name('stack')
+            or confess "You must have a 'stack' attribute";
+
+        my $push = $consumer->find_method_by_name('push')
+            or confess "You must have a 'push' method";
+
+        my $params = $push->parsed_signature->positional_params->params;
+        @$params == 1
+            or confess "Your push method must take a single parameter";
+
+        $params->[0]->sigil eq '$'
+            or confess "Your push parameter must be a scalar";
+
+        ...
+    }
+
 =back
 
 =cut
