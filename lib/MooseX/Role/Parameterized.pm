@@ -160,7 +160,7 @@ MooseX::Role::Parameterized - roles with composition parameters
 
 =head1 SYNOPSIS
 
-    package MyRole::Counter;
+    package Counter;
     use MooseX::Role::Parameterized;
 
     parameter name => (
@@ -193,12 +193,12 @@ MooseX::Role::Parameterized - roles with composition parameters
     package MyGame::Weapon;
     use Moose;
 
-    with 'MyRole::Counter' => { name => 'enchantment' };
+    with Counter => { name => 'enchantment' };
 
     package MyGame::Wand;
     use Moose;
 
-    with 'MyRole::Counter' => { name => 'zapped' };
+    with Counter => { name => 'zapped' };
 
 =head1 L<MooseX::Role::Parameterized::Tutorial>
 
