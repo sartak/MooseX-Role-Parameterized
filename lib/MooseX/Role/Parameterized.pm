@@ -298,6 +298,8 @@ L<http://sartak.blogspot.com/2009/05/parameterized-roles.html>
 
 L<http://stevan-little.blogspot.com/2009/07/thoughts-on-parameterized-roles.html>
 
+L<http://sartak.org/talks/yapc-asia-2009/(parameterized)-roles/>
+
 =head1 COPYRIGHT AND LICENSE
 
 Copyright 2007-2009 Infinity Interactive

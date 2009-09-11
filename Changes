@@ -1,6 +1,7 @@
 Changes for MooseX-Role-Parameterized
 
-0.13
+0.13  Sep 11, 2009
+    * Documentation improvements (Sartak)
 
 0.12  Aug 15, 2009
     * Add MooseX::Role::Parameterized->current_metaclass for forward compat
