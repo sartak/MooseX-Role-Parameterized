@@ -10,7 +10,12 @@ use MooseX::Role::Parameterized::Parameters;
 
 use constant parameterized_role_metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterized';
 use constant parameter_metaclass => 'MooseX::Role::Parameterized::Meta::Parameter';
-use constant parameters_class => 'MooseX::Role::Parameterized::Parameters';
+
+has parameters_class => (
+    is      => 'ro',
+    isa     => 'ClassName',
+    default => 'MooseX::Role::Parameterized::Parameters',
+);
 
 has parameters_metaclass => (
     is      => 'rw',
