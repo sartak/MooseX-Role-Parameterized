@@ -8,6 +8,7 @@ githubmeta;
 
 requires       'Moose' => '0.78';
 test_requires  'Test::Moose';
+test_requires  'Test::More' => '0.88';
 
 build_requires 'Test::Exception' => '0.27';
 
