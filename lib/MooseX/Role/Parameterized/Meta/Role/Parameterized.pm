@@ -34,5 +34,17 @@ This is the metaclass for parameterized roles; that is, parameterizable roles
 with their parameters bound. All this actually provides is a place to store the
 L<MooseX::Role::Parameterized::Parameters> object.
 
+=head1 ATTRIBUTES
+
+=head2 genitor
+
+Returns the L<MooseX::Role::Parameterized::Meta::Role::Parameterizable>
+metaobject that generated this role.
+
+=head2 parameters
+
+Returns the L<MooseX::Role::Parameterized::Parameters> object that represents
+the specific parameter values for this parameterized role.
+
 =cut
 
