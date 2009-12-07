@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 14;
+use Test::More tests => 16;
 use Test::Exception;
 
 use MooseX::Role::Parameterized::Parameters;
@@ -34,6 +34,9 @@ my $parameter = ($parameters_metaclass->get_all_attributes)[0];
 isa_ok($parameter, 'MooseX::Role::Parameterized::Meta::Parameter');
 is($parameter->name, 'length', "parameter name");
 ok($parameter->is_required, "parameter is required");
+
+ok(MyRole::LengthParameter->meta->has_parameter('length'), 'has_parameter');
+ok(!MyRole::LengthParameter->meta->has_parameter('kjhef'), 'has_parameter');
 
 throws_ok {
     MyRole::LengthParameter->meta->construct_parameters;

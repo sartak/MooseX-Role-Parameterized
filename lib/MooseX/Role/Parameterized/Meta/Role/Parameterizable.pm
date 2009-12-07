@@ -29,6 +29,9 @@ has parameters_metaclass => (
             attribute_metaclass => $self->parameter_metaclass,
         );
     },
+    handles => {
+        has_parameter => 'has_attribute',
+    },
 );
 
 has role_generator => (
