@@ -1,6 +1,8 @@
 Changes for MooseX-Role-Parameterized
 
-0.14
+0.15
+
+0.14  December 6, 2009
     * Fix a nesting bug reported by nothingmuch with a test case provided
       by rafl (Sartak)
 
