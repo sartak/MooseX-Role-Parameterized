@@ -79,7 +79,10 @@ sub generate_role {
     confess "A role generator is required to generate roles"
         unless $self->has_role_generator;
 
-    my $role = $self->parameterized_role_metaclass->create_anon_role(parameters => $parameters);
+    my $role = $self->parameterized_role_metaclass->create_anon_role(
+        genitor    => $self,
+        parameters => $parameters,
+    );
 
     local $MooseX::Role::Parameterized::CURRENT_METACLASS = $role;
 

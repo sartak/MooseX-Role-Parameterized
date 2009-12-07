@@ -6,6 +6,12 @@ our $VERSION = '0.10';
 
 use MooseX::Role::Parameterized::Parameters;
 
+has genitor => (
+    is       => 'ro',
+    isa      => 'MooseX::Role::Parameterized::Meta::Role::Parameterizable',
+    required => 1,
+);
+
 has parameters => (
     is  => 'rw',
     isa => 'MooseX::Role::Parameterized::Parameters',

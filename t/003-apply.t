@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 20;
+use Test::More tests => 21;
 use Test::Exception;
 
 my %args;
@@ -67,6 +67,7 @@ can_ok('MyClass::Dumper' => qw(freeze_Dumper thaw_Dumper));
 cant_ok('MyClass::Dumper' => qw(freeze_Storable thaw_Storable));
 
 is($args{consumer}, MyClass::Dumper->meta, 'Role block receives consumer');
+is(MyClass::Dumper->meta->roles->[0]->genitor, MyRole::Storage->meta, 'genitor');
 
 do {
     package MyClass::Storable;
