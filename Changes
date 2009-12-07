@@ -1,6 +1,13 @@
 Changes for MooseX-Role-Parameterized
 
 0.14
+    * Fix a nesting bug reported by nothingmuch with a test case provided
+      by rafl (Sartak)
+
+    * Parameterized roles now keep track of their genitor role (Sartak)
+
+    * Delegate parameterizable->has_parameter to parameters->has_attribute
+      (Sartak)
 
 0.13  Sep 11, 2009
     * Documentation improvements (Sartak)
