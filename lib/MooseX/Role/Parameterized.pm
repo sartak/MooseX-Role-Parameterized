@@ -23,7 +23,7 @@ sub parameter {
     my $caller = shift;
 
     confess "'parameter' may not be used inside of the role block"
-        if $CURRENT_METACLASS;
+        if $CURRENT_METACLASS && $CURRENT_METACLASS->genitor->name eq $caller;
 
     my $meta   = Class::MOP::class_of($caller);
 
