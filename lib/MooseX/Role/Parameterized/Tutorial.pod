@@ -13,7 +13,7 @@ L<Moose::Cookbook::Roles::Recipe1> for an introduction to L<Moose::Role>.
 While combining roles affords you a great deal of flexibility, individual roles
 have very little in the way of configurability. Core Moose provides C<alias>
 for renaming methods and C<excludes> for ignoring methods. These options are
-primarily (perhaps solely) for disambiguating role conflicts. See
+primarily (perhaps solely) for resolving role conflicts. See
 L<Moose::Cookbook::Roles::Recipe2> for more about C<alias> and C<excludes>.
 
 Because roles serve many different masters, they usually provide only the least
@@ -22,7 +22,7 @@ configurability than C<alias> and C<excludes> is required. Perhaps your role
 needs to know which method to call when it is done. Or what default value to
 use for its C<url> attribute.
 
-Parameterized roles offer exactly this solution.
+Parameterized roles offer a solution to these (and other) kinds of problems.
 
 =head1 USAGE
 
@@ -50,8 +50,9 @@ immediately after the role they belong to:
 =head3 C<parameter>
 
 Inside your parameterized role, you specify a set of parameters. This is
-exactly like specifying the attributes of a class. Instead of C<has> you use
-the keyword C<parameter>, but your parameters can use any options to C<has>.
+exactly like specifying the attributes of a class. Instead of L<Moose/has> you
+use the keyword C<parameter>, but your parameters can use any options to
+C<has>.
 
     parameter 'delegation' => (
         isa       => 'HashRef|ArrayRef|RegexpRef',
@@ -61,15 +62,20 @@ the keyword C<parameter>, but your parameters can use any options to C<has>.
 You do have to declare what parameters you accept, just like you have to
 declare what attributes you accept for regular Moose objects.
 
+One departure from C<has> is that we create a reader accessor for you by
+default. In other words, we assume C<< is => 'ro' >>. If you do not want an
+accessor, you can use C<< is => 'bare' >>.
+
 =head3 C<role>
 
 C<role> takes a block of code that will be used to generate your role with its
-parameters bound. Here is where you declare parameterized components: use
-C<has>, method modifiers, and so on. The C<role> block receives an argument,
-which contains the parameters specified by C<with>. You can access the
-parameters just like regular attributes on that object.
+parameters bound. Here is where you declare components that depend on
+parameters. You can declare attributes, methods, modifiers, etc. The first
+argument to the C<role> is an object containing the parameters specified by
+C<with>. You can access the parameters just like regular attributes on that
+object.
 
-Each time you compose this parameterized role, the role {} block will be
+Each time you compose this parameterized role, the C<role {}> block will be
 executed. It will receive a new parameter object and produce an entirely new
 role. That's the whole point, after all.
 
@@ -112,9 +118,9 @@ can now also choose type, default value, whether it's required, B<traits>, etc.
 
 =item Inform a role of your class' attributes and methods
 
-Core roles can require only methods with specific names. Now your roles can
-require that you specify a method name you wish the role to instrument, or
-which attributes to dump to a file.
+Core roles can only require methods with specific names chosen by the role. Now
+your roles can demand that the class specifies a method name you wish the role to
+instrument, or which attributes to dump to a file.
 
     parameter instrument_method => (
         isa      => 'Str',
