@@ -43,10 +43,10 @@ sub role (&) {
 
 sub init_meta {
     my $self = shift;
+    my %options = @_;
+    $options{metaclass} ||= 'MooseX::Role::Parameterized::Meta::Role::Parameterizable';
 
-    return Moose::Role->init_meta(@_,
-        metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterizable',
-    );
+    return Moose::Role->init_meta(%options);
 }
 
 sub has {

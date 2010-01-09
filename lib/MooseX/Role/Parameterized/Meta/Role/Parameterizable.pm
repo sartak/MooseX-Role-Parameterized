@@ -79,7 +79,10 @@ sub generate_role {
     confess "A role generator is required to generate roles"
         unless $self->has_role_generator;
 
-    my $role = $self->parameterized_role_metaclass->create_anon_role(
+    my $parameterized_role_metaclass = $self->parameterized_role_metaclass;
+    Class::MOP::load_class($parameterized_role_metaclass);
+
+    my $role = $parameterized_role_metaclass->create_anon_role(
         genitor    => $self,
         parameters => $parameters,
     );
