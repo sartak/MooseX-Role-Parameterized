@@ -2,7 +2,7 @@ package MooseX::Role::Parameterized::Meta::Parameter;
 use Moose;
 extends 'Moose::Meta::Attribute';
 
-our $VERSION = '0.15';
+our $VERSION = '0.16';
 
 # This doesn't actually do anything because _process_options does not consult
 # the default value of "is". hrm.
