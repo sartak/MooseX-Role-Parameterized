@@ -1,5 +1,11 @@
 Changes for MooseX-Role-Parameterized
 
+0.16  February 4, 2010
+    * Allow specifying custom metaclasses for parameterized
+      roles (Oliver Charles)
+
+    * Documentation improvements (Oliver Charles, Sartak)
+
 0.15  January 5, 2010
     * Move the guts of MXRPMR::Parameterized into a trait. See
       http://www.nntp.perl.org/group/perl.moose/2010/01/msg1294.html (Sartak)
