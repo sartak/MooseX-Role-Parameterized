@@ -1,5 +1,8 @@
 Changes for MooseX-Role-Parameterized
 
+0.17  February 11, 2010
+    * MANIFEST fixes (Karen Etheridge)
+
 0.16  February 4, 2010
     * Allow specifying custom metaclasses for parameterized
       roles (Oliver Charles)

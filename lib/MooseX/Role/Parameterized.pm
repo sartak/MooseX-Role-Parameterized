@@ -7,7 +7,7 @@ use Scalar::Util 'blessed';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 our $CURRENT_METACLASS;
 
 Moose::Exporter->setup_import_methods(
@@ -225,6 +225,9 @@ role however you wish.
 There are many possible implementations for parameterized roles (hopefully with
 a consistent enough API); I believe this to be the easiest and most flexible
 design. Coincidentally, Pugs originally had an eerily similar design.
+
+See L<MooseX::Role::Parameterized::Extending> for some tips on how to extend
+this module.
 
 =head2 Why a parameters object?
 

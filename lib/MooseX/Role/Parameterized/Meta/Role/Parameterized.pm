@@ -3,7 +3,7 @@ use Moose;
 extends 'Moose::Meta::Role';
 with 'MooseX::Role::Parameterized::Meta::Trait::Parameterized';
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
