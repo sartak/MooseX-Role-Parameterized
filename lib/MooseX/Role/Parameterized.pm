@@ -269,7 +269,7 @@ L<http://sartak.org/talks/yapc-asia-2009/(parameterized)-roles/>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2007-2009 Infinity Interactive
+Copyright 2007-2010 Infinity Interactive
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
