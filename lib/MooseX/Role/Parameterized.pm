@@ -259,42 +259,6 @@ C<excludes> is an error.
 
 Shawn M Moore, C<sartak@gmail.com>
 
-=head1 EXAMPLES
-
-=over 4
-
-=item L<Fey::Role::HasAliasName>
-
-=item L<Fey::Role::MakesAliasObjects>
-
-=item L<Fey::Role::SQL::Cloneable>
-
-=item L<Fey::Role::SetOperation>
-
-=item L<IM::Engine::PluggableConstructor>
-
-=item L<IM::Engine::RequiresPlugins>
-
-=item L<KiokuDB::Role::Scan>
-
-=item L<MooseX::RelatedClassRoles>
-
-=item L<MooseX::Role::Matcher>
-
-=item L<MooseX::Role::XMLRPC::Client>
-
-=item L<MooseX::WithCache>
-
-=item L<Net::Journyx::Object::Loadable>
-
-=item L<NetHack::Item::Role::IncorporatesStats>
-
-=item L<TAEB::Action::Role::Item>
-
-=item L<WWW::Mechanize::TreeBuilder>
-
-=back
-
 =head1 SEE ALSO
 
 L<http://sartak.blogspot.com/2009/05/parameterized-roles.html>
