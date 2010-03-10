@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 21;
+use Test::More tests => 22;
 use Test::Exception;
 
 my %args;
@@ -135,6 +135,17 @@ throws_ok {
         format => 'YAML',
     };
 } qr/^Attribute \(format\) does not pass the type constraint/;
+
+throws_ok {
+    package MyRole::Sans::Block;
+    use MooseX::Role::Parameterized;
+
+    parameter 'foo';
+
+    package MyClass::Error::BlocklessRole;
+    use Moose;
+    with 'MyRole::Sans::Block' => {};
+} qr/^\QA role generator is required to apply parameterized roles (did you forget the 'role { ... }' block in your parameterized role 'MyRole::Sans::Block'?)\E/;
 
 sub cant_ok {
     local $Test::Builder::Level = $Test::Builder::Level + 1;

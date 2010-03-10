@@ -76,7 +76,7 @@ sub generate_role {
                    ? $args{parameters}
                    : $self->construct_parameters(%{ $args{parameters} });
 
-    confess "A role generator is required to generate roles"
+    confess "A role generator is required to apply parameterized roles (did you forget the 'role { ... }' block in your parameterized role '".$self->name."'?)"
         unless $self->has_role_generator;
 
     my $parameterized_role_metaclass = $self->parameterized_role_metaclass;
