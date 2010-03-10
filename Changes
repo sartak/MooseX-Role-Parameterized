@@ -1,5 +1,9 @@
 Changes for MooseX-Role-Parameterized
 
+0.18  March 10, 2010
+    * Improve the error message when you leave off the role {} block
+      http://stackoverflow.com/questions/2418177/moose-and-error-messages-the-sun-and-the-moon/2418429
+
 0.17  February 11, 2010
     * MANIFEST fixes (Karen Etheridge)
 
