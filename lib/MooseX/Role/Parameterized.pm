@@ -267,6 +267,8 @@ L<http://stevan-little.blogspot.com/2009/07/thoughts-on-parameterized-roles.html
 
 L<http://sartak.org/talks/yapc-asia-2009/(parameterized)-roles/>
 
+L<http://perldition.org/articles/Parameterized%20Roles%20with%20MooseX::Declare.pod>
+
 =head1 COPYRIGHT AND LICENSE
 
 Copyright 2007-2010 Infinity Interactive
