@@ -19,8 +19,8 @@ L<Moose::Cookbook::Roles::Recipe2> for more about C<alias> and C<excludes>.
 Because roles serve many different masters, they usually provide only the least
 common denominator of functionality. To empower roles further, more
 configurability than C<alias> and C<excludes> is required. Perhaps your role
-needs to know which method to call when it is done. Or what default value to
-use for its C<url> attribute.
+needs to know which method to call when it is done processing. Or what default
+value to use for its C<url> attribute.
 
 Parameterized roles offer a solution to these (and other) kinds of problems.
 
@@ -47,6 +47,9 @@ immediately after the role they belong to:
         'My::Other::Role',
     );
 
+We, like Moose itself, use L<Data::OptList> to make sure that a list of role
+names and associated parameters is handled correctly.
+
 =head3 C<parameter>
 
 Inside your parameterized role, you specify a set of parameters. This is
@@ -63,8 +66,11 @@ You do have to declare what parameters you accept, just like you have to
 declare what attributes you accept for regular Moose objects.
 
 One departure from C<has> is that we create a reader accessor for you by
-default. In other words, we assume C<< is => 'ro' >>. If you do not want an
-accessor, you can use C<< is => 'bare' >>.
+default. In other words, we assume C<< is => 'ro' >>. We create this reader for
+convenience because generally the parameterized role is the only consumer of
+the parameters object, so data hiding is not as important than in the general
+case of L<Moose/has>. If you do not want an accessor, you can use
+C<< is => 'bare' >>.
 
 =head3 C<role>
 
