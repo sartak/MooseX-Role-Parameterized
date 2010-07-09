@@ -8,13 +8,14 @@ MooseX::Role::Parameterized::Extending - extending MooseX::Role::Parameterized r
 
 There are heaps of useful modules in the MooseX namespace that you can use to
 make your roles more powerful. However, they do not always work out of the box
-with MooseX::Role::Parameterized, but it's fairlystraight forward to achieve
+with MooseX::Role::Parameterized, but it's fairly straight-forward to achieve
 the functionality you desire.
 
-MooseX::Role::Parameterized was designed to be extensible, and it is now
-possible to apply custom traits to the generated role, giving them the
-functionality provided in MooseX modules. In this example, we will look at
-applying the fake trait 'MooseX::MagicRole' to a parameterized role.
+MooseX::Role::Parameterized was designed to be as extensible as the rest of
+Moose, and it is now possible to apply custom traits to the generated role,
+giving them the functionality provided in MooseX modules. In this example, we
+will look at applying the fake trait 'MooseX::MagicRole' to a parameterized
+role.
 
 The first we need to do is define a new metaclass for our parameterized role.
 To get MooseX::Role::Parameterized to apply this metaclass to our roles, we
@@ -23,6 +24,7 @@ need a little bit of glue first:
     package MyApp::Meta::Role::Parameterizable;
     use Moose;
     extends 'MooseX::Role::Parameterized::Meta::Role::Parameterizable';
+    with 'MooseX::MagicRole';
     sub parameterized_role_metaclass { 'MyApp::Meta::Role::Parameterized' }
 
 Now we can take advantage of this by specifying our glue metaclass to
