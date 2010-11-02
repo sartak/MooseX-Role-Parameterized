@@ -1,5 +1,8 @@
 Changes for MooseX-Role-Parameterized
 
+0.20  November 2, 2010
+    * Minor test refactoring to fix blead support [rt.perl.org #78244]
+
 0.19  July 8, 2010
     * Documentation improvements
 

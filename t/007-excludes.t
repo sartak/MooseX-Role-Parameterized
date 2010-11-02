@@ -22,13 +22,16 @@ do {
 Moose::Meta::Role->create("Role::A");
 Moose::Meta::Role->create("Role::B");
 
+my @keep_roles_alive;
 sub excludes_roles {
     map {
-        MyRole::Excluder->meta->generate_role(
+        my $role = MyRole::Excluder->meta->generate_role(
             parameters => {
                 exclude => $_,
             },
-        )->name
+        );
+        push @keep_roles_alive, $role;
+        $role->name;
     } @_
 }
 

@@ -19,13 +19,16 @@ do {
     };
 };
 
+my @keep_roles_alive;
 sub requires_names {
     map {
-        MyRole::Requires->meta->generate_role(
+        my $role = MyRole::Requires->meta->generate_role(
             parameters => {
                 requires => $_,
             },
-        )->name
+        );
+        push @keep_roles_alive, $role;
+        $role->name;
     } @_
 }
 
