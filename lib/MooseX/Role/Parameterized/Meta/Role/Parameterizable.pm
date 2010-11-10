@@ -82,10 +82,19 @@ sub generate_role {
     my $parameterized_role_metaclass = $self->parameterized_role_metaclass;
     Class::MOP::load_class($parameterized_role_metaclass);
 
-    my $role = $parameterized_role_metaclass->create_anon_role(
-        genitor    => $self,
-        parameters => $parameters,
-    );
+    my $role;
+    if ($args{package}) {
+        $role = $parameterized_role_metaclass->create(
+            $args{package},
+            genitor    => $self,
+            parameters => $parameters,
+        );
+    } else {
+        $role = $parameterized_role_metaclass->create_anon_role(
+            genitor    => $self,
+            parameters => $parameters,
+        );
+    }
 
     local $MooseX::Role::Parameterized::CURRENT_METACLASS = $role;
 
@@ -187,7 +196,8 @@ The arguments are those specified by the consumer as parameter values.
 Returns a new instance of
 L<MooseX::Role::Parameterized::Meta::Role::Parameterized> based on the
 arguments. The arguments are a hash reference of C<parameters> and, if
-available, a C<consumer> metaobject.
+available, a C<consumer> metaobject.  A C<package> argument may be given to use
+a specific package name instead of autogenerating one.
 
 =head2 apply
 

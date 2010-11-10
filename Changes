@@ -1,5 +1,7 @@
 Changes for MooseX-Role-Parameterized
 
+    * "package" arg can now tell generate_role to use a specific package
+
 0.20  November 2, 2010
     * Minor test refactoring to fix blead support [rt.perl.org #78244]
 

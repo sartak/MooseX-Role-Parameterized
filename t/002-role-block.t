@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 8;
+use Test::More 0.96 tests => 3;
 use Test::Exception;
 
 my ($parameters, %args);
@@ -32,22 +32,54 @@ do {
 
 ok(MyPerson->meta->has_role_generator, "MyPerson has a role generator");
 
-my $role = MyPerson->meta->generate_role(
-    parameters => {
-        default_age => 7,
-    },
-);
+subtest "generation of an anonymous role" => sub {
+    plan tests => 8;
+    my $role = MyPerson->meta->generate_role(
+        parameters => {
+            default_age => 7,
+        },
+    );
 
-isa_ok($role, 'Moose::Meta::Role', 'generate_role created a role');
+    isa_ok($role, 'Moose::Meta::Role', 'generate_role created a role');
 
-is($role->parameters, $parameters, 'the generated role knows its parameters');
+    like($role->name, qr{ANON}, '...with an anonymous name');
 
-is($parameters->default_age, 7);
-is($args{operating_on}, $role, "we pass in the role metaclass that we're operating on");
+    is($role->parameters, $parameters, 'the generated role knows its parameters');
 
-my $age_attr = $role->get_attribute('age');
-is($age_attr->{default}, 7, "role's age attribute has the right default");
+    is($parameters->default_age, 7);
+    is($args{operating_on}, $role, "we pass in the role metaclass that we're operating on");
 
-my $birthday_method = $role->get_method('birthday');
-is($birthday_method->name, 'birthday', "method name");
-is($birthday_method->package_name, $role->name, "package name");
+    my $age_attr = $role->get_attribute('age');
+    is($age_attr->{default}, 7, "role's age attribute has the right default");
+
+    my $birthday_method = $role->get_method('birthday');
+    is($birthday_method->name, 'birthday', "method name");
+    is($birthday_method->package_name, $role->name, "package name");
+};
+
+subtest "generating a role with a provided name" => sub {
+    plan tests => 8;
+
+    my $role = MyPerson->meta->generate_role(
+        package    => 'RJBS::Was::Here',
+        parameters => {
+            default_age => 10,
+        },
+    );
+
+    isa_ok($role, 'Moose::Meta::Role', 'generate_role created a role');
+
+    is($role->name, 'RJBS::Was::Here', '...with the name we expected');
+
+    is($role->parameters, $parameters, 'the generated role knows its parameters');
+
+    is($parameters->default_age, 10);
+    is($args{operating_on}, $role, "we pass in the role metaclass that we're operating on");
+
+    my $age_attr = $role->get_attribute('age');
+    is($age_attr->{default}, 10, "role's age attribute has the right default");
+
+    my $birthday_method = $role->get_method('birthday');
+    is($birthday_method->name, 'birthday', "method name");
+    is($birthday_method->package_name, $role->name, "package name");
+};
