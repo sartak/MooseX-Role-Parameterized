@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Test::More tests => 5;
-use Test::Exception;
+use Test::Fatal;
 
 do {
     package MyRole::Requires;
@@ -32,40 +32,40 @@ sub requires_names {
     } @_
 }
 
-throws_ok {
+like( exception {
     Moose::Meta::Class->create_anon_class(
         roles => [ requires_names('alpha') ],
     );
-} qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'alpha' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/;
+}, qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'alpha' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/);
 
-lives_ok {
+is (exception {
     Moose::Meta::Class->create_anon_class(
         methods => {
             alpha => sub {},
         },
         roles => [ requires_names('alpha') ],
     );
-};
+}, undef);
 
-throws_ok {
+like( exception {
     Moose::Meta::Class->create_anon_class(
         methods => {
             alpha => sub {},
         },
         roles => [ requires_names('alpha', 'beta') ],
     );
-} qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+\|Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'beta' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/;
+}, qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+\|Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'beta' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/);
 
-throws_ok {
+like( exception {
     Moose::Meta::Class->create_anon_class(
         methods => {
             beta => sub {},
         },
         roles => [ requires_names('alpha', 'beta') ],
     );
-} qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+\|Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'alpha' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/;
+}, qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+\|Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'alpha' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/);
 
-lives_ok {
+is (exception {
     Moose::Meta::Class->create_anon_class(
         methods => {
             alpha => sub {},
@@ -73,5 +73,5 @@ lives_ok {
         },
         roles => [ requires_names('alpha', 'beta') ],
     );
-};
+}, undef);
 

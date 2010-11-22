@@ -10,7 +10,7 @@ githubmeta;
 requires      'Moose' => '0.78';
 test_requires 'Test::Moose';
 test_requires 'Test::More' => '0.88';
-test_requires 'Test::Exception' => '0.27';
+test_requires 'Test::Fatal';
 
 WriteAll;
 

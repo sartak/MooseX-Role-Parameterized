@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Test::More tests => 16;
-use Test::Exception;
+use Test::Fatal;
 
 use MooseX::Role::Parameterized::Parameters;
 
@@ -38,9 +38,9 @@ ok($parameter->is_required, "parameter is required");
 ok(MyRole::LengthParameter->meta->has_parameter('length'), 'has_parameter');
 ok(!MyRole::LengthParameter->meta->has_parameter('kjhef'), 'has_parameter');
 
-throws_ok {
+like( exception {
     MyRole::LengthParameter->meta->construct_parameters;
-} qr/^Attribute \(length\) is required/;
+}, qr/^Attribute \(length\) is required/);
 
 $p = MyRole::LengthParameter->meta->construct_parameters(
     length => 5,
@@ -48,9 +48,9 @@ $p = MyRole::LengthParameter->meta->construct_parameters(
 
 is($p->length, 5, "correct length");
 
-throws_ok {
+like( exception {
     $p->length(10);
-} qr/^Cannot assign a value to a read-only accessor/;
+}, qr/^Cannot assign a value to a read-only accessor/);
 
 do {
     package MyRole::LengthParameter;

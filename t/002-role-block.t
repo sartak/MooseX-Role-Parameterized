@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 use Test::More 0.96 tests => 3;
-use Test::Exception;
 
 my ($parameters, %args);
 

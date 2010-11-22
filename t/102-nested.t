@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use Test::Exception;
+use Test::Fatal;
 
 use FindBin;
 use lib "$FindBin::Bin/lib";
@@ -24,17 +24,17 @@ use lib "$FindBin::Bin/lib";
 {
     package Moo;
     use Moose;
-    ::lives_ok(sub {
+    ::is( ::exception {
         with 'Foo';
-    });
+    }, undef);
 }
 
 {
     package se;
     use Moose;
-    ::lives_ok(sub {
+    ::is( ::exception {
         with 'Bar';
-    });
+    }, undef);
 }
 
 my $foo = Moo->meta->roles->[0];

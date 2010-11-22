@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Test::More tests => 22;
-use Test::Exception;
+use Test::Fatal;
 
 my %args;
 do {
@@ -122,21 +122,21 @@ do {
 can_ok('MyClass::Three' => qw(freeze_Dumper freeze_Storable thaw_Dumper thaw_Storable store dump));
 is($args{consumer}, MyClass::Three->meta, 'Role block receives consumer');
 
-throws_ok {
+like( exception {
     package MyClass::Error::Required;
     use Moose;
     with 'MyRole::Storage';
-} qr/^Attribute \(format\) is required/;
+}, qr/^Attribute \(format\) is required/);
 
-throws_ok {
+like( exception {
     package MyClass::Error::Invalid;
     use Moose;
     with 'MyRole::Storage' => {
         format => 'YAML',
     };
-} qr/^Attribute \(format\) does not pass the type constraint/;
+}, qr/^Attribute \(format\) does not pass the type constraint/);
 
-throws_ok {
+like( exception {
     package MyRole::Sans::Block;
     use MooseX::Role::Parameterized;
 
@@ -145,7 +145,7 @@ throws_ok {
     package MyClass::Error::BlocklessRole;
     use Moose;
     with 'MyRole::Sans::Block' => {};
-} qr/^\QA role generator is required to apply parameterized roles (did you forget the 'role { ... }' block in your parameterized role 'MyRole::Sans::Block'?)\E/;
+}, qr/^\QA role generator is required to apply parameterized roles (did you forget the 'role { ... }' block in your parameterized role 'MyRole::Sans::Block'?)\E/);
 
 sub cant_ok {
     local $Test::Builder::Level = $Test::Builder::Level + 1;

@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Test::More tests => 3;
-use Test::Exception;
+use Test::Fatal;
 
 do {
     package MyRole::Excluder;
@@ -35,21 +35,21 @@ sub excludes_roles {
     } @_
 }
 
-lives_ok {
+is (exception {
     Moose::Meta::Class->create_anon_class(
         roles => [ excludes_roles('Role::A') ],
     );
-};
+}, undef);
 
-throws_ok {
+like( exception {
     Moose::Meta::Class->create_anon_class(
         roles => [ 'Role::A', excludes_roles('Role::A') ],
     );
-} qr/^Conflict detected: Role Moose::Meta::Role::__ANON__::SERIAL::\d+ excludes role 'Role::A'/;
+}, qr/^Conflict detected: Role Moose::Meta::Role::__ANON__::SERIAL::\d+ excludes role 'Role::A'/);
 
-lives_ok {
+is (exception {
     Moose::Meta::Class->create_anon_class(
         roles => [ 'Role::B', excludes_roles('Role::A') ],
     );
-};
+}, undef);
 

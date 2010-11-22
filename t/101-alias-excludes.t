@@ -2,35 +2,35 @@
 use strict;
 use warnings;
 use Test::More tests => 4;
-use Test::Exception;
+use Test::Fatal;
 
 do {
     package MyRole;
     use MooseX::Role::Parameterized;
 
-    ::throws_ok {
+    ::like( ::exception {
         parameter 'alias';
-    } qr/^The parameter name \(alias\) is currently forbidden/;
+    }, qr/^The parameter name \(alias\) is currently forbidden/);
 
-    ::throws_ok {
+    ::like( ::exception {
         parameter 'excludes';
-    } qr/^The parameter name \(excludes\) is currently forbidden/;
+    }, qr/^The parameter name \(excludes\) is currently forbidden/);
 };
 
 do {
     package MyClass;
     use MooseX::Role::Parameterized;
 
-    ::throws_ok {
+    ::like( ::exception {
         with MyRole => {
             alias => 1,
         };
-    } qr/^The parameter name \(alias\) is currently forbidden/;
+    }, qr/^The parameter name \(alias\) is currently forbidden/);
 
-    ::throws_ok {
+    ::like( ::exception {
         with MyRole => {
             excludes => 1,
         };
-    } qr/^The parameter name \(excludes\) is currently forbidden/;
+    }, qr/^The parameter name \(excludes\) is currently forbidden/);
 };
 
