@@ -3,6 +3,7 @@ Changes for MooseX-Role-Parameterized
 0.22  November 26, 2010
     * The test suite now uses Test::Fatal instead of Test::Exception (Karen
       Etheridge).
+    * Fix Test::More dependency (reported by Father Chrysostomos)
 
 0.21  November 15, 2010
     * "package" arg can now tell generate_role to use a specific package (rjbs)

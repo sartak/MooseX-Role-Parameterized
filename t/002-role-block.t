@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More 0.96 tests => 3;
+use Test::More tests => 3;
 
 my ($parameters, %args);
 
