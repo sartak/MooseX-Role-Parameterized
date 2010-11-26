@@ -1,6 +1,6 @@
 Changes for MooseX-Role-Parameterized
 
-{{NEXT}}
+0.22  November 26, 2010
     * The test suite now uses Test::Fatal instead of Test::Exception (Karen
       Etheridge).
 
