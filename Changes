@@ -1,5 +1,9 @@
 Changes for MooseX-Role-Parameterized
 
+0.23  December 25, 2010
+    * Merry Christmas!
+    * Make MooseX::Role::Parameterized::Extending more instructive. Hopefully.
+
 0.22  November 26, 2010
     * The test suite now uses Test::Fatal instead of Test::Exception (Karen
       Etheridge).
