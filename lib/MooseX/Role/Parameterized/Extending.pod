@@ -25,7 +25,6 @@ need a little bit of glue first:
     use Moose;
     extends 'MooseX::Role::Parameterized::Meta::Role::Parameterizable';
     with 'MooseX::MagicRole';
-    sub parameterized_role_metaclass { 'MyApp::Meta::Role::Parameterized' }
 
 Now we can take advantage of this by specifying our glue metaclass to
 MooseX::Role::Parameterized:
