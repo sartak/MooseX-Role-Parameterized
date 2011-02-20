@@ -271,6 +271,8 @@ L<http://perldition.org/articles/Parameterized%20Roles%20with%20MooseX::Declare.
 
 L<http://www.modernperlbooks.com/mt/2011/01/the-parametric-role-of-my-mvc-plugin-system.html>
 
+L<http://jjnapiorkowski.typepad.com/modern-perl/2010/08/parameterized-roles-and-method-traits-redo.html>
+
 L<http://sartak.org/talks/yapc-asia-2009/(parameterized)-roles/>
 
 L<https://github.com/SamuraiJack/JooseX-Role-Parameterized> - this extension ported to JavaScript's Joose
