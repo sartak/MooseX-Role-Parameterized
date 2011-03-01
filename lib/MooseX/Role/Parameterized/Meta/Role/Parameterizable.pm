@@ -105,7 +105,9 @@ sub generate_role {
         consumer     => $args{consumer},
     );
 
-    return $role;
+    # don't just return $role here, because it might have been changed when
+    # metaroles are applied
+    return $MooseX::Role::Parameterized::CURRENT_METACLASS;
 }
 
 sub _role_for_combination {
