@@ -1,5 +1,9 @@
 Changes for MooseX-Role-Parameterized
 
+0.24  March 1, 2011
+    * Moose 2.0 will make MXRP more extensible by allowing role
+      reinitialization, so register the hook to make that happen (doy)
+
 0.23  December 25, 2010
     * Merry Christmas!
     * Make MooseX::Role::Parameterized::Extending more instructive. Hopefully.

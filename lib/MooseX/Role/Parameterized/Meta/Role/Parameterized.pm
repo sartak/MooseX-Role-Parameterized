@@ -3,7 +3,7 @@ use Moose;
 extends 'Moose::Meta::Role';
 with 'MooseX::Role::Parameterized::Meta::Trait::Parameterized';
 
-our $VERSION = '0.23';
+our $VERSION = '0.24';
 
 around reinitialize => sub {
     my $orig = shift;
