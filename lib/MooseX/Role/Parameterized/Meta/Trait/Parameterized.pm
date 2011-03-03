@@ -16,6 +16,25 @@ has parameters => (
     isa => 'MooseX::Role::Parameterized::Parameters',
 );
 
+around reinitialize => sub {
+    my $orig = shift;
+    my $class = shift;
+    my ($pkg) = @_;
+    my $meta = blessed($pkg) ? $pkg : Class::MOP::class_of($pkg);
+
+    my $genitor    = $meta->genitor;
+    my $parameters = $meta->parameters;
+
+    my $new = $class->$orig(
+        @_,
+        (defined($genitor)    ? (genitor    => $genitor)    : ()),
+        (defined($parameters) ? (parameters => $parameters) : ()),
+    );
+    # in case the role metaclass was reinitialized
+    $MooseX::Role::Parameterized::CURRENT_METACLASS = $new;
+    return $new;
+};
+
 no Moose::Role;
 
 1;
