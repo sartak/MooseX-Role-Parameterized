@@ -1,5 +1,9 @@
 Changes for MooseX-Role-Parameterized
 
+0.25  March 4, 2011
+    * Move the reinitialization hook from Role to Trait so hardcore hackers
+      (trait janitors) get the benefit too (doy)
+
 0.24  March 1, 2011
     * Made MXRP more extensible by hooking into the role metaobject
       reinitialization (doy)
