@@ -41,11 +41,14 @@ is (exception {
     );
 }, undef);
 
-like( exception {
-    Moose::Meta::Class->create_anon_class(
-        roles => [ 'Role::A', excludes_roles('Role::A') ],
-    );
-}, qr/^Conflict detected: Role Moose::Meta::Role::__ANON__::SERIAL::\d+ excludes role 'Role::A'/);
+{
+    my ($role_name) = excludes_roles('Role::A');
+    like( exception {
+        Moose::Meta::Class->create_anon_class(
+            roles => [ 'Role::A', $role_name ],
+        );
+    }, qr/^Conflict detected: Role $role_name excludes role 'Role::A'/);
+}
 
 is (exception {
     Moose::Meta::Class->create_anon_class(

@@ -32,11 +32,14 @@ sub requires_names {
     } @_
 }
 
-like( exception {
-    Moose::Meta::Class->create_anon_class(
-        roles => [ requires_names('alpha') ],
-    );
-}, qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'alpha' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/);
+{
+    my ($role_name) = requires_names('alpha');
+    like( exception {
+        Moose::Meta::Class->create_anon_class(
+            roles => [ $role_name ],
+        );
+    }, qr/'$role_name' requires the method 'alpha' to be implemented by '[\w:]+'/);
+}
 
 is (exception {
     Moose::Meta::Class->create_anon_class(
@@ -47,23 +50,29 @@ is (exception {
     );
 }, undef);
 
-like( exception {
-    Moose::Meta::Class->create_anon_class(
-        methods => {
-            alpha => sub {},
-        },
-        roles => [ requires_names('alpha', 'beta') ],
-    );
-}, qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+\|Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'beta' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/);
+{
+    my ($role1, $role2) = requires_names('alpha', 'beta');
+    like( exception {
+        Moose::Meta::Class->create_anon_class(
+            methods => {
+                alpha => sub {},
+            },
+            roles => [ $role1, $role2 ],
+        );
+    }, qr/'$role1\|$role2' requires the method 'beta' to be implemented by '[\w:]+'/);
+}
 
-like( exception {
-    Moose::Meta::Class->create_anon_class(
-        methods => {
-            beta => sub {},
-        },
-        roles => [ requires_names('alpha', 'beta') ],
-    );
-}, qr/'Moose::Meta::Role::__ANON__::SERIAL::\d+\|Moose::Meta::Role::__ANON__::SERIAL::\d+' requires the method 'alpha' to be implemented by 'Class::MOP::Class::__ANON__::SERIAL::\d+'/);
+{
+    my ($role1, $role2) = requires_names('alpha', 'beta');
+    like( exception {
+        Moose::Meta::Class->create_anon_class(
+            methods => {
+                beta => sub {},
+            },
+            roles => [ $role1, $role2 ],
+        );
+    }, qr/'$role1\|$role2' requires the method 'alpha' to be implemented by '[\w:]+'/);
+}
 
 is (exception {
     Moose::Meta::Class->create_anon_class(
