@@ -1,5 +1,8 @@
 Changes for MooseX-Role-Parameterized
 
+0.26  March 20, 2011
+    * make tests stop relying on a specific format for anon class/role names (doy)
+
 0.25  March 4, 2011
     * Move the reinitialization hook from Role to Trait so hardcore hackers
       (trait janitors) get the benefit too (doy)
