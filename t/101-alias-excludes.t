@@ -19,7 +19,7 @@ do {
 
 do {
     package MyClass;
-    use MooseX::Role::Parameterized;
+    use Moose;
 
     ::like( ::exception {
         with MyRole => {
