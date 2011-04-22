@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More;
 
 my @calls;
 
@@ -47,4 +47,6 @@ do {
 is_deeply([splice @calls], [], "no calls yet");
 MyClass->new;
 is_deeply([splice @calls], ["calling new", "took 0 seconds", "called new"], "instrumented new");
+
+done_testing;
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More;
 
 do {
     package MyTrait::Label;
@@ -50,4 +50,6 @@ do {
 
 is(MyClass::LabeledURL->meta->get_attribute('url')->label, 'yay');
 is(MyClass::LabeledURL::Redux->meta->get_attribute('url')->label, 'overridden');
+
+done_testing;
 

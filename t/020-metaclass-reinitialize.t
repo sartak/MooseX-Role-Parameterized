@@ -2,13 +2,11 @@
 use strict;
 use warnings;
 use Test::More;
+
 BEGIN {
     require Moose;
     if (Moose->VERSION < 1.9900) {
         plan skip_all => "this test isn't relevant on Moose 1.x";
-    }
-    else {
-        plan tests => 1;
     }
 }
 
@@ -52,3 +50,6 @@ BEGIN {
     is(Foo->meta->find_attribute_by_name('foo')->foo, 'bar',
        "applied_attribute metaroles work");
 }
+
+done_testing;
+

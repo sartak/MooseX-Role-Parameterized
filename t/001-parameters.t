@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 16;
+use Test::More;
 use Test::Fatal;
 
 use MooseX::Role::Parameterized::Parameters;
@@ -70,4 +70,6 @@ for my $param_name ('first_name', 'last_name') {
     is($param->type_constraint, 'Str', "$param_name type constraint");
     ok(!$param->is_required, "$param_name is optional");
 }
+
+done_testing;
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 8;
+use Test::More;
 
 do {
     package MyRole::Delegator;
@@ -74,4 +74,6 @@ sub cant_ok {
         ok(!$instance->can($method), "$instance cannot $method");
     }
 }
+
+done_testing;
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 use strict;
 use warnings;
 use Test::More;
@@ -51,3 +52,4 @@ ok(!Foo->meta->has_parameter('include_is_bar'), 'Foo does not have include_is_ba
 ok(!Bar->meta->has_parameter('outer'), 'Bar does not have outer param');
 
 done_testing;
+

@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Test::More skip_all => "Not implemented yet";
-#use Test::More tests => 7;
+#use Test::More;
 
 {
     package Test::Role;
@@ -59,3 +59,6 @@ can_ok( $p, "blech" );
 is( $p->blech, "yes" );
 
 is( $p->foo, "hello foo" );
+
+done_testing;
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 5;
+use Test::More;
 use Test::Fatal;
 
 do {
@@ -31,4 +31,6 @@ do {
 Moose::Meta::Class->create_anon_class(
     roles => ['MyRole::Storage'],
 );
+
+done_testing;
 

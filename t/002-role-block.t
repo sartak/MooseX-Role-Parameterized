@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More;
 
 my ($parameters, %args);
 
@@ -32,7 +32,6 @@ do {
 ok(MyPerson->meta->has_role_generator, "MyPerson has a role generator");
 
 subtest "generation of an anonymous role" => sub {
-    plan tests => 8;
     my $role = MyPerson->meta->generate_role(
         parameters => {
             default_age => 7,
@@ -57,8 +56,6 @@ subtest "generation of an anonymous role" => sub {
 };
 
 subtest "generating a role with a provided name" => sub {
-    plan tests => 8;
-
     my $role = MyPerson->meta->generate_role(
         package    => 'RJBS::Was::Here',
         parameters => {
@@ -82,3 +79,6 @@ subtest "generating a role with a provided name" => sub {
     is($birthday_method->name, 'birthday', "method name");
     is($birthday_method->package_name, $role->name, "package name");
 };
+
+done_testing;
+

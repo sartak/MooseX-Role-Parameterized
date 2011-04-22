@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 6;
+use Test::More;
 
 do {
     package MyItem::Role::Wearable;
@@ -81,4 +81,6 @@ is($feathered->slot, 'head');
 my $chastity = MyItem::Belt->new;
 ok($chastity->is_worn, "default for belt is worn");
 is($chastity->slot, 'waist');
+
+done_testing;
 

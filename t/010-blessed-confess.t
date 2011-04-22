@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More;
 
 do {
     package MyRole;
@@ -9,4 +9,6 @@ do {
     ::is(\&confess, \&Carp::confess, 'confess');
     ::is(\&blessed, \&Scalar::Util::blessed, 'blessed');
 };
+
+done_testing;
 

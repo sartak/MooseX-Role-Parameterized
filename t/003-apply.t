@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 22;
+use Test::More;
 use Test::Fatal;
 
 my %args;
@@ -154,4 +154,6 @@ sub cant_ok {
         ok(!$instance->can($method), "$instance cannot $method");
     }
 }
+
+done_testing;
 

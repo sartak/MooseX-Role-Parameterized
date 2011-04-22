@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More;
 
 do {
     package MyRole;
@@ -32,4 +32,6 @@ do {
 
 ok(MyClass->can('attr'), "the parameterized attribute was composed");
 ok(MyClass->can('meth'), "the unparameterized method was composed");
+
+done_testing;
 

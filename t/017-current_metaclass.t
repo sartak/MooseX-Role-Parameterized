@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 7;
+use Test::More;
 
 do {
     package Labeled;
@@ -42,4 +42,6 @@ do {
     with Labeled => { default => 'foo' };
     ::is(MooseX::Role::Parameterized->current_metaclass, undef, 'metaclass is gone now');
 };
+
+done_testing;
 

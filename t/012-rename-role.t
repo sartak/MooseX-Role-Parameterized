@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 1;
+use Test::More;
 
 do {
     package MyRole;
@@ -17,4 +17,6 @@ do {
 
 my $role = MyRole->meta->generate_role;
 ok($role->has_method('ok'), "renaming the role block export works");
+
+done_testing;
 

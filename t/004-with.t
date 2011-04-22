@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 6;
+use Test::More;
 
 do {
     package MyItem::Role::Wearable;
@@ -61,4 +61,6 @@ is($visored->slot, 'head');
 my $utility = MyItem::Belt->new;
 ok(!$utility->is_worn);
 is($utility->slot, 'waist');
+
+done_testing;
 

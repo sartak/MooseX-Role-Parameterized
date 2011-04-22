@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 5;
+use Test::More;
 use Test::Fatal;
 
 do {
@@ -83,4 +83,6 @@ is (exception {
         roles => [ requires_names('alpha', 'beta') ],
     );
 }, undef);
+
+done_testing;
 

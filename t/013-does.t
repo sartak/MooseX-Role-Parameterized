@@ -1,8 +1,7 @@
-
+#!/usr/bin/env perl
 use strict;
 use warnings;
-
-use Test::More tests => 3;
+use Test::More;
 use Test::Moose;
 
 {
@@ -26,4 +25,6 @@ cmp_ok(
     'MyPRole',
     'generated role does the parameterized role'
 );
+
+done_testing;
 

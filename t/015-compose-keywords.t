@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 20;
+use Test::More;
 
 do {
     package OtherRole;
@@ -46,4 +46,6 @@ for my $meta (MyRole->meta, MyRole->meta->generate_role) {
     ok($meta->requires_method('requirement'), 'requires');
     ok($meta->excludes_role('exclusion'), 'excludes');
 }
+
+done_testing;
 
