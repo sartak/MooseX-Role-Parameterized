@@ -11,14 +11,15 @@ functionality common to many classes from any part of your class hierarchy. See
 L<Moose::Cookbook::Roles::Recipe1> for an introduction to L<Moose::Role>.
 
 While combining roles affords you a great deal of flexibility, individual roles
-have very little in the way of configurability. Core Moose provides C<alias>
-for renaming methods and C<excludes> for ignoring methods. These options are
-primarily (perhaps solely) for resolving role conflicts. See
-L<Moose::Cookbook::Roles::Recipe2> for more about C<alias> and C<excludes>.
+have very little in the way of configurability. Core Moose provides C<-alias>
+for renaming methods and C<-excludes> for ignoring methods. These options are
+primarily for resolving role conflicts. Depending on how much of a purist you are,
+these options are I<solely> for resolving role conflicts. See
+L<Moose::Cookbook::Roles::Recipe2> for more about C<-alias> and C<-excludes>.
 
 Because roles serve many different masters, they usually provide only the least
 common denominator of functionality. To empower roles further, more
-configurability than C<alias> and C<excludes> is required. Perhaps your role
+configurability than C<-alias> and C<-excludes> is required. Perhaps your role
 needs to know which method to call when it is done processing. Or what default
 value to use for its C<url> attribute.
 
@@ -29,8 +30,9 @@ Parameterized roles offer a solution to these (and other) kinds of problems.
 =head3 C<with>
 
 The syntax of a class consuming a parameterized role has not changed from the
-standard C<with>. You pass in parameters just like you pass in C<alias> and
-C<excludes> to ordinary roles:
+standard C<with>. You pass in parameters just like you pass in C<-alias> and
+C<-excludes> to ordinary roles (though without hyphens, since these are not
+core Moose composition parameters):
 
     with 'MyRole::InstrumentMethod' => {
         method_name => 'dbh_do',

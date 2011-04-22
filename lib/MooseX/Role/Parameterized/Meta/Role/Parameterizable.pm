@@ -47,7 +47,6 @@ sub add_parameter {
     confess "You must provide a name for the parameter"
         if !defined($name);
 
-    # need to figure out a plan for these guys..
     confess "The parameter name ($name) is currently forbidden"
         if $name eq 'alias'
         || $name eq 'excludes';
@@ -59,7 +58,6 @@ sub construct_parameters {
     my $self = shift;
     my %args = @_;
 
-    # need to figure out a plan for these guys..
     for my $name ('alias', 'excludes') {
         confess "The parameter name ($name) is currently forbidden"
             if exists $args{$name};
