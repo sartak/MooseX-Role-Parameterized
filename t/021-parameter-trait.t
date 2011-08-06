@@ -26,7 +26,7 @@ do {
     role {
         my $p = shift;
 
-        method faves => sub { $p->meta->find_attribute('favorite')->label . ': ' . $p->favorite };
+        method faves => sub { $p->meta->get_attribute('favorite')->label . ': ' . $p->favorite };
     }
 };
 
