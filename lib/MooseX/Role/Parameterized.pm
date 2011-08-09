@@ -31,7 +31,10 @@ sub parameter {
     $names = [$names] if !ref($names);
 
     for my $name (@$names) {
-        $meta->add_parameter($name, @_);
+        $meta->add_parameter($name => (
+            is => 'ro',
+            @_,
+        ));
     }
 }
 
