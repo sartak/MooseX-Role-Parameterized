@@ -31,7 +31,6 @@ $parameters_metaclass = MyRole::LengthParameter->meta->parameters_metaclass;
 is($parameters_metaclass->get_all_attributes, 1, "exactly one parameter");
 
 my $parameter = ($parameters_metaclass->get_all_attributes)[0];
-isa_ok($parameter, 'MooseX::Role::Parameterized::Meta::Parameter');
 is($parameter->name, 'length', "parameter name");
 ok($parameter->is_required, "parameter is required");
 

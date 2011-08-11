@@ -5,11 +5,9 @@ extends 'Moose::Meta::Role';
 our $VERSION = '0.26';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterized;
-use MooseX::Role::Parameterized::Meta::Parameter;
 use MooseX::Role::Parameterized::Parameters;
 
 use constant parameterized_role_metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterized';
-use constant parameter_metaclass => 'MooseX::Role::Parameterized::Meta::Parameter';
 
 has parameters_class => (
     is      => 'ro',
@@ -25,8 +23,7 @@ has parameters_metaclass => (
         my $self = shift;
 
         $self->parameters_class->meta->create_anon_class(
-            superclasses        => [$self->parameters_class],
-            attribute_metaclass => $self->parameter_metaclass,
+            superclasses => [$self->parameters_class],
         );
     },
     handles => {

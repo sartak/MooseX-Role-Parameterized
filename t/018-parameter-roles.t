@@ -20,7 +20,6 @@ use Test::More skip_all => "Not implemented yet";
         method foo => sub { "hello " . $p->name };
 
         has blech => (
-            metaclass => "MooseX::Role::Parameterized::Meta::Parameter",
             isa => "Str",
             is  => "ro",
             required => 1,
