@@ -3,21 +3,21 @@ use 5.008001;
 use Moose::Role ();
 use Moose::Exporter;
 use Carp 'confess';
-use Scalar::Util 'blessed';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
 our $VERSION = '0.27';
 our $CURRENT_METACLASS;
 
-Moose::Exporter->setup_import_methods(
-    with_caller => ['parameter', 'role', 'method', 'has', 'with', 'extends',
-                    'requires', 'excludes', 'augment', 'inner', 'before',
-                    'after', 'around', 'super', 'override'],
-    as_is => [ 'confess', 'blessed' ],
-);
-
 sub current_metaclass { $CURRENT_METACLASS }
+
+Moose::Exporter->setup_import_methods(
+    also        => 'Moose::Role',
+    with_caller => ['parameter', 'role'],
+    with_meta   => ['method'],
+    as_is       => ['confess'],
+    meta_lookup => sub { current_metaclass || Class::MOP::class_of(shift) },
+);
 
 sub parameter {
     my $caller = shift;
@@ -52,106 +52,19 @@ sub init_meta {
     return Moose::Role->init_meta(%options);
 }
 
-sub has {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    my $names = shift;
-    $names = [$names] if !ref($names);
-
-    for my $name (@$names) {
-        $meta->add_attribute($name, @_);
-    }
-}
-
 sub method {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    my $name   = shift;
-    my $body   = shift;
+    my $meta = shift;
+    my $name = shift;
+    my $body = shift;
 
     my $method = $meta->method_metaclass->wrap(
-        package_name => $caller,
+        package_name => $meta->name,
         name         => $name,
         body         => $body,
     );
 
     $meta->add_method($name => $method);
 }
-
-sub _add_method_modifier {
-    my $type   = shift;
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    my $code = pop @_;
-
-    for (@_) {
-        Carp::croak "Roles do not currently support "
-            . ref($_)
-            . " references for $type method modifiers"
-            if ref $_;
-
-        my $add_method = "add_${type}_method_modifier";
-        $meta->$add_method($_, $code);
-    }
-}
-
-sub before {
-    _add_method_modifier('before', @_);
-}
-
-sub after {
-    _add_method_modifier('after', @_);
-}
-
-sub around {
-    _add_method_modifier('around', @_);
-}
-
-sub with {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    Moose::Util::apply_all_roles($meta, @_);
-}
-
-sub requires {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    Carp::croak "Must specify at least one method" unless @_;
-    $meta->add_required_methods(@_);
-}
-
-sub excludes {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    Carp::croak "Must specify at least one role" unless @_;
-    $meta->add_excluded_roles(@_);
-}
-
-# see Moose.pm for discussion
-sub super {
-    return unless $Moose::SUPER_BODY;
-    $Moose::SUPER_BODY->(@Moose::SUPER_ARGS);
-}
-
-sub override {
-    my $caller = shift;
-    my $meta   = $CURRENT_METACLASS || Class::MOP::class_of($caller);
-
-    my ($name, $code) = @_;
-    $meta->add_override_method_modifier($name, $code);
-}
-
-sub extends { Carp::croak "Roles do not currently support 'extends'" }
-
-sub inner { Carp::croak "Roles cannot support 'inner'" }
-
-sub augment { Carp::croak "Roles cannot support 'augment'" }
 
 1;
 

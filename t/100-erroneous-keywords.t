@@ -15,7 +15,7 @@ do {
     role {
         ::like( ::exception {
             extends 'MyRole::Parameterized';
-        }, qr/^Roles do not currently support 'extends'/);
+        }, qr/^Roles do not support 'extends' \(you can use 'with' to specialize a role\)/);
         ::like( ::exception {
             inner()
         }, qr/^Roles cannot support 'inner'/);
