@@ -15,7 +15,6 @@ Moose::Exporter->setup_import_methods(
     also        => 'Moose::Role',
     with_caller => ['parameter', 'role'],
     with_meta   => ['method'],
-    as_is       => ['confess'],
     meta_lookup => sub { current_metaclass || Class::MOP::class_of(shift) },
 );
 
