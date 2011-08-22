@@ -1,5 +1,12 @@
 Changes for MooseX-Role-Parameterized
 
+0.27  August 22, 2011
+    * Remove MooseX::Role::Parameterized::Meta::Parameter; instead,
+      the default for parameters of (is => 'ro') is set by the
+      "parameter" sugar. This removes an unnecessary metaclass and
+      removes weird edge cases caused by it. Please please please
+      report any breakage!
+
 0.26  March 20, 2011
     * make tests stop relying on a specific format for anon class/role names (doy)
 
