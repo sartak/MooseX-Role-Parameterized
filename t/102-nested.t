@@ -23,7 +23,7 @@ use lib "$FindBin::Bin/lib";
 }
 
 {
-    package Moo;
+    package Foo::Class;
     use Moose;
     ::is( ::exception {
         with 'Foo';
@@ -31,18 +31,18 @@ use lib "$FindBin::Bin/lib";
 }
 
 {
-    package se;
+    package Bar::Class;
     use Moose;
     ::is( ::exception {
         with 'Bar';
     }, undef);
 }
 
-my $foo = Moo->meta->roles->[0];
+my $foo = Foo::Class->meta->roles->[0];
 ok($foo->has_method('is_foo'), 'Foo got the "is_foo" method');
 ok(!$foo->has_method('is_bar'), 'Foo did not get the "is_bar" method from Bar');
 
-my $bar = se->meta->roles->[0];
+my $bar = Bar::Class->meta->roles->[0];
 ok($bar->has_method('is_bar'), 'Bar got the "is_bar" method');
 ok(!$bar->has_method('is_foo'), 'Bar does not get "is_foo"');
 
