@@ -1,8 +1,10 @@
 *.swp
 MANIFEST
 MANIFEST.bak
+MANIFEST.SKIP
 META.yml
 MYMETA.yml
+MYMETA.json
 Makefile
 Makefile.old
 SIGNATURE
