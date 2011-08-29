@@ -7,7 +7,11 @@ our $VERSION = '0.27';
 use MooseX::Role::Parameterized::Meta::Role::Parameterized;
 use MooseX::Role::Parameterized::Parameters;
 
-use constant parameterized_role_metaclass => 'MooseX::Role::Parameterized::Meta::Role::Parameterized';
+has parameterized_role_metaclass => (
+    is      => 'ro',
+    isa     => 'ClassName',
+    default => 'MooseX::Role::Parameterized::Meta::Role::Parameterized',
+);
 
 has parameters_class => (
     is      => 'ro',
