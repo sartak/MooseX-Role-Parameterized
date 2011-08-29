@@ -7,6 +7,8 @@ Changes for MooseX-Role-Parameterized
       code in MXRP.
     * Remove alias/excludes special case errors since they have been
       replaced in core Moose with -alias and -excludes.
+    * Expressly forbid using role { } inside role { } (which makes no
+      sense but I suppose you could accidentally trigger it)
 
 0.27  August 22, 2011
     * Remove MooseX::Role::Parameterized::Meta::Parameter; instead,

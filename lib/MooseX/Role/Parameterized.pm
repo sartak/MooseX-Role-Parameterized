@@ -40,6 +40,10 @@ sub parameter {
 sub role (&) {
     my $caller         = shift;
     my $role_generator = shift;
+
+    confess "'role' may not be used inside of the role block"
+        if $CURRENT_METACLASS && $CURRENT_METACLASS->genitor->name eq $caller;
+
     Class::MOP::class_of($caller)->role_generator($role_generator);
 }
 
