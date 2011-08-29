@@ -19,13 +19,7 @@ has parameters_metaclass => (
     is      => 'rw',
     isa     => 'Moose::Meta::Class',
     lazy    => 1,
-    default => sub {
-        my $self = shift;
-
-        $self->parameters_class->meta->create_anon_class(
-            superclasses => [$self->parameters_class],
-        );
-    },
+    builder => '_build_parameters_metaclass',
     handles => {
         has_parameter        => 'has_attribute',
         add_parameter        => 'add_attribute',
@@ -38,6 +32,14 @@ has role_generator => (
     isa       => 'CodeRef',
     predicate => 'has_role_generator',
 );
+
+sub _build_parameters_metaclass {
+    my $self = shift;
+
+    return $self->parameters_class->meta->create_anon_class(
+        superclasses => [$self->parameters_class],
+    );
+}
 
 sub generate_role {
     my $self     = shift;
