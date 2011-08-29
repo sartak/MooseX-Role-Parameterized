@@ -128,13 +128,18 @@ MooseX::Role::Parameterized::Meta::Role::Parameterizable - metaclass for paramet
 
 =head1 DESCRIPTION
 
-This is the metaclass for parameterizable roles, roles that have their
-parameters currently unbound. These are the roles that you use L<Moose/with>,
-but instead of composing the parameterizable role, we construct a new
-parameterized role
-(L<MooseX::Role::Parameterized::Meta::Role::Parameterized>).
+This is the metaclass for parameterizable roles, roles that have
+their parameters currently unbound. These are the roles that you
+use L<Moose/with>, but instead of composing the parameterizable
+role, we construct a new parameterized role
+(L<MooseX::Role::Parameterized::Meta::Role::Parameterized>) and use
+that new parameterized instead.
 
 =head1 ATTRIBUTES
+
+=head2 parameterized_role_metaclass
+
+The name of the class that will be used to construct the parameterized role.
 
 =head2 parameters_class
 
@@ -159,9 +164,8 @@ L<MooseX::Role::Parameterized/role> keyword.
 
 =head2 add_parameter $name, %options
 
-Basically delegates to L<Moose::Meta::Class/add_attribute> on the
-L</parameters_metaclass> but with error messages that refer to a "parameter"
-not an "attribute".
+Delegates to L<Moose::Meta::Class/add_attribute> on the
+L</parameters_metaclass> object.
 
 =head2 construct_parameters %arguments
 
@@ -172,11 +176,11 @@ The arguments are those specified by the consumer as parameter values.
 
 =head2 generate_role %arguments
 
-Returns a new instance of
-L<MooseX::Role::Parameterized::Meta::Role::Parameterized> based on the
-arguments. The arguments are a hash reference of C<parameters> and, if
-available, a C<consumer> metaobject.  A C<package> argument may be given to use
-a specific package name instead of autogenerating one.
+Returns a new instance of L</parameterized_role_metaclass>. The
+arguments are a hash reference of C<parameters> used to bind the
+role's parameters, and, if available, a C<consumer> metaobject.  A
+C<package> argument may be given to use a specific package name
+instead of autogenerating one.
 
 =head2 apply
 
