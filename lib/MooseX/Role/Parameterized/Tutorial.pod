@@ -29,10 +29,11 @@ Parameterized roles offer a solution to these (and other) kinds of problems.
 
 =head3 C<with>
 
-The syntax of a class consuming a parameterized role has not changed from the
-standard C<with>. You pass in parameters just like you pass in C<-alias> and
-C<-excludes> to ordinary roles (though without hyphens, since these are not
-core Moose composition parameters):
+The syntax of a class consuming a parameterized role has not changed
+from the standard C<with>. You pass in parameters just like you
+pass in C<-alias> and C<-excludes> to ordinary roles (though your
+custom parameters do not get hyphens, since these are not core Moose
+composition parameters):
 
     with 'MyRole::InstrumentMethod' => {
         method_name => 'dbh_do',

@@ -27,7 +27,9 @@ has parameters_metaclass => (
         );
     },
     handles => {
-        has_parameter => 'has_attribute',
+        has_parameter        => 'has_attribute',
+        add_parameter        => 'add_attribute',
+        construct_parameters => 'new_object',
     },
 );
 
@@ -36,32 +38,6 @@ has role_generator => (
     isa       => 'CodeRef',
     predicate => 'has_role_generator',
 );
-
-sub add_parameter {
-    my $self = shift;
-    my $name = shift;
-
-    confess "You must provide a name for the parameter"
-        if !defined($name);
-
-    confess "The parameter name ($name) is currently forbidden"
-        if $name eq 'alias'
-        || $name eq 'excludes';
-
-    $self->parameters_metaclass->add_attribute($name => @_);
-}
-
-sub construct_parameters {
-    my $self = shift;
-    my %args = @_;
-
-    for my $name ('alias', 'excludes') {
-        confess "The parameter name ($name) is currently forbidden"
-            if exists $args{$name};
-    }
-
-    $self->parameters_metaclass->new_object(\%args);
-}
 
 sub generate_role {
     my $self     = shift;

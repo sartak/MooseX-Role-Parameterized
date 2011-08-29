@@ -10,7 +10,7 @@ do {
 
     ::like( ::exception {
         parameter()
-    }, qr/^You must provide a name for the parameter/);
+    }, qr/^You must provide a name for the attribute/);
 
     role {
         ::like( ::exception {

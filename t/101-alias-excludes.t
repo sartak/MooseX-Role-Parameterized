@@ -8,30 +8,32 @@ do {
     package MyRole;
     use MooseX::Role::Parameterized;
 
-    ::like( ::exception {
+    ::is( ::exception {
         parameter 'alias';
-    }, qr/^The parameter name \(alias\) is currently forbidden/);
+    }, undef);
 
-    ::like( ::exception {
+    ::is( ::exception {
         parameter 'excludes';
-    }, qr/^The parameter name \(excludes\) is currently forbidden/);
+    }, undef);
+
+    role { }
 };
 
 do {
     package MyClass;
     use Moose;
 
-    ::like( ::exception {
+    ::is( ::exception {
         with MyRole => {
             alias => 1,
         };
-    }, qr/^The parameter name \(alias\) is currently forbidden/);
+    }, undef);
 
-    ::like( ::exception {
+    ::is( ::exception {
         with MyRole => {
             excludes => 1,
         };
-    }, qr/^The parameter name \(excludes\) is currently forbidden/);
+    }, undef);
 };
 
 do {
