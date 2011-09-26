@@ -1,7 +1,7 @@
 Changes for MooseX-Role-Parameterized
 
 0.28
-    * MXRP now uses the new meta_lookup feature added to Moose 2.XXX
+    * MXRP now uses the new meta_lookup feature added to Moose 2.0300
       (specifically for MXRP) to avoid duplicating Moose-0.60-era
       Moose::Role sugar. This means the error messages you get are
       better, and there's a lot less ugly code in MXRP.

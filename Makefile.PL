@@ -9,7 +9,7 @@ name           'MooseX-Role-Parameterized';
 all_from       'lib/MooseX/Role/Parameterized.pm';
 githubmeta;
 
-requires      'Moose' => '0.78';
+requires      'Moose' => '2.0300';
 test_requires 'Test::Moose';
 test_requires 'Test::More' => '0.96';
 test_requires 'Test::Fatal';
