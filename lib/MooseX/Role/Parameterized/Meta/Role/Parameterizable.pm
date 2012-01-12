@@ -176,11 +176,25 @@ The arguments are those specified by the consumer as parameter values.
 
 =head2 generate_role %arguments
 
-Returns a new instance of L</parameterized_role_metaclass>. The
-arguments are a hash reference of C<parameters> used to bind the
-role's parameters, and, if available, a C<consumer> metaobject.  A
-C<package> argument may be given to use a specific package name
-instead of autogenerating one.
+This method takes any combination of three named parameters:
+
+=over 4
+
+=item arguments
+
+A hashref of parameters for the role, same as would be passed in at a "with"
+statement.
+
+=item package
+
+A package name that, if present, we will use for the generated role; if not,
+we generate an anonymous role.
+
+=item consumer
+
+A consumer metaobject, if available.
+
+=back
 
 =head2 apply
 
