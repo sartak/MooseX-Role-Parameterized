@@ -176,7 +176,9 @@ The arguments are those specified by the consumer as parameter values.
 
 =head2 generate_role %arguments
 
-This method takes any combination of three named parameters:
+This method generates and returns a new instance of
+L</parameterized_role_metaclass>. It can take any combination of
+three named parameters:
 
 =over 4
 
