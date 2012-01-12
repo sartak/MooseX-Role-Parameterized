@@ -1,6 +1,10 @@
 Changes for MooseX-Role-Parameterized
 
-0.28
+1.00
+    * MooseX::Role::Parameterized now depends on Moose 2.0300
+      released 2011-09-23 for its several core improvements, hence the
+      major version number bump.
+
     * MXRP now uses the new meta_lookup feature added to Moose 2.0300
       (specifically for MXRP) to avoid duplicating Moose-0.60-era
       Moose::Role sugar. This means the error messages you get are
@@ -10,6 +14,8 @@ Changes for MooseX-Role-Parameterized
       removed in Moose 2.0200.
     * Expressly forbid using role { } inside role { } (which makes no
       sense but I suppose you could accidentally trigger it)
+    * Documentation fix from cweyl@alumni.drew.edu
+      https://github.com/sartak/MooseX-Role-Parameterized/pull/5
 
 0.27  August 22, 2011
     * Remove MooseX::Role::Parameterized::Meta::Parameter; instead,
