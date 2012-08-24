@@ -12,3 +12,4 @@ blib/
 inc/
 pm_to_blib
 MooseX-Role-Parameterized-*
+.prove
