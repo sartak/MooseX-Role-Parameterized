@@ -48,6 +48,9 @@ do {
         is    => 'ro',
         label => 'overridden',
     );
+
+    no Moose;
+    no t::MooseX::LabeledAttributes;
 };
 
 my $meta = MyClass::LabeledURL->meta;
