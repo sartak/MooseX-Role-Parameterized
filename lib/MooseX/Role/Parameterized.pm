@@ -3,6 +3,7 @@ use 5.008001;
 use Moose::Role ();
 use Moose::Exporter;
 use Carp 'confess';
+use Moose::Util 'find_meta';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterizable;
 
@@ -15,7 +16,7 @@ Moose::Exporter->setup_import_methods(
     also        => 'Moose::Role',
     with_caller => ['parameter', 'role'],
     with_meta   => ['method'],
-    meta_lookup => sub { current_metaclass || Class::MOP::class_of(shift) },
+    meta_lookup => sub { current_metaclass || find_meta(shift) },
 );
 
 sub parameter {
@@ -24,7 +25,7 @@ sub parameter {
     confess "'parameter' may not be used inside of the role block"
         if current_metaclass && current_metaclass->genitor->name eq $caller;
 
-    my $meta = Class::MOP::class_of($caller);
+    my $meta = find_meta($caller);
 
     my $names = shift;
     $names = [$names] if !ref($names);
@@ -44,7 +45,7 @@ sub role (&) {
     confess "'role' may not be used inside of the role block"
         if current_metaclass && current_metaclass->genitor->name eq $caller;
 
-    Class::MOP::class_of($caller)->role_generator($role_generator);
+    find_meta($caller)->role_generator($role_generator);
 }
 
 sub init_meta {
