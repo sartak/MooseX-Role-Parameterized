@@ -4,6 +4,7 @@ use Moose::Role;
 our $VERSION = '0.27';
 
 use MooseX::Role::Parameterized::Parameters;
+use Moose::Util 'find_meta';
 
 has genitor => (
     is       => 'ro',
@@ -20,7 +21,7 @@ around reinitialize => sub {
     my $orig = shift;
     my $class = shift;
     my ($pkg) = @_;
-    my $meta = blessed($pkg) ? $pkg : Class::MOP::class_of($pkg);
+    my $meta = blessed($pkg) ? $pkg : find_meta($pkg);
 
     my $genitor    = $meta->genitor;
     my $parameters = $meta->parameters;
