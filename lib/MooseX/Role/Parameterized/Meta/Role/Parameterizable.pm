@@ -6,7 +6,7 @@ our $VERSION = '1.01';
 
 use MooseX::Role::Parameterized::Meta::Role::Parameterized;
 use MooseX::Role::Parameterized::Parameters;
-use Module::Runtime 'use_module';
+use Module::Runtime 'use_package_optimistically';
 
 has parameterized_role_metaclass => (
     is      => 'ro',
@@ -58,7 +58,7 @@ sub generate_role {
         unless $self->has_role_generator;
 
     my $parameterized_role_metaclass = $self->parameterized_role_metaclass;
-    use_module($parameterized_role_metaclass);
+    use_package_optimistically($parameterized_role_metaclass);
 
     my $role;
     if ($args{package}) {
