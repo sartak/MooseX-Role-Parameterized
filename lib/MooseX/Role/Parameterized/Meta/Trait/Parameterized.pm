@@ -1,7 +1,7 @@
 package MooseX::Role::Parameterized::Meta::Trait::Parameterized;
 use Moose::Role;
 
-our $VERSION = '0.27';
+our $VERSION = '1.01';
 
 use MooseX::Role::Parameterized::Parameters;
 use Moose::Util 'find_meta';

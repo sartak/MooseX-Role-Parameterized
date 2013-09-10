@@ -1,5 +1,6 @@
 Changes for MooseX-Role-Parameterized
 
+1.01 September 10, 2013
     * removed use of deprecated Class::MOP::load_class (ether)
 
 1.00 January 12, 2012
