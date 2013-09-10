@@ -25,6 +25,7 @@ do {
 
 do {
     package MyClass::WithMethods;
+    use Moose;
 
     sub foo { "foo" }
     sub bar { "bar" }
