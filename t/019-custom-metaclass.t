@@ -13,6 +13,7 @@ BEGIN {
     do {
         package Parameterized;
         use Moose;
+        $INC{'Parameterized.pm'} = 1;
         extends 'Moose::Meta::Role';
         with 'MooseX::Role::Parameterized::Meta::Trait::Parameterized';
         with 'MyTrait';
@@ -21,6 +22,7 @@ BEGIN {
     do {
         package Parameterizable;
         use Moose;
+        $INC{'Parameterizable.pm'} = 1;
         extends 'MooseX::Role::Parameterized::Meta::Role::Parameterizable';
         sub parameterized_role_metaclass { 'Parameterized' }
     };
