@@ -1,5 +1,11 @@
 Changes for MooseX-Role-Parameterized
 
+1.02 September 11, 2013
+    * set %INC entries in test to avoid failures with
+      Moose pre-2.11 (kentfrederic)
+        https://github.com/sartak/MooseX-Role-Parameterized/pull/7
+        https://rt.cpan.org/Ticket/Display.html?id=88593
+
 1.01 September 10, 2013
     * removed use of deprecated Class::MOP::load_class (ether)
 

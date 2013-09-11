@@ -1,7 +1,7 @@
 package MooseX::Role::Parameterized::Parameters;
 use Moose;
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
